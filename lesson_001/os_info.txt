@@ -1,0 +1,5 @@
+OS info is 
+uname_result(system='Darwin', node='MacBook-Air-Dina.local', release='18.7.0', version='Darwin Kernel Version 18.7.0: Tue Aug 20 16:57:14 PDT 2019; root:xnu-4903.271.2~2/RELEASE_X86_64', machine='x86_64', processor='i386')
+
+Python version is 3.7.3 (v3.7.3:ef4ec6ed12, Mar 25 2019, 16:52:21) 
+[Clang 6.0 (clang-600.0.57)] ('64bit', '')
