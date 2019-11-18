@@ -48,9 +48,24 @@ print('Лампа -', lamps_quantity, 'шт, стоимость', lamps_cost, '�
 
 # WARNING для знающих циклы: БЕЗ циклов. Да, с переменными; да, неэффективно; да, копипаста.
 # Это задание на ручное вычисление - что бы потом понять как работают циклы и насколько с ними проще жить.
+table_cost = store[goods['Стол']][0]['quantity'] * store[goods['Стол']][0]['price']
+table_cost1 = store[goods['Стол']][1]['quantity'] * store[goods['Стол']][1]['price']
+sum_table_cost = table_cost + table_cost1
+sum_table_quantity = store[goods['Стол']][0]['quantity'] + store[goods['Стол']][1]['quantity']
+print('Стол -', sum_table_quantity, 'шт, стоимость', sum_table_cost, 'руб')
 
-# TODO здесь ваш код
+couch_cost = store[goods['Диван']][0]['quantity'] * store[goods['Диван']][0]['price']
+couch_cost1 = store[goods['Диван']][1]['quantity'] * store[goods['Диван']][1]['price']
+sum_couch_cost = couch_cost + couch_cost1
+sum_couch_quantity = store[goods['Диван']][0]['quantity'] + store[goods['Диван']][1]['quantity']
+print('Диван -', sum_couch_quantity, 'шт, стоимость', sum_couch_cost, 'руб')
 
+chair_cost = store[goods['Стул']][0]['quantity'] * store[goods['Стул']][0]['price']
+chair_cost1 = store[goods['Стул']][1]['quantity'] * store[goods['Стул']][1]['price']
+chair_cost2 = store[goods['Стул']][2]['quantity'] * store[goods['Стул']][2]['price']
+sum_chair_cost = chair_cost + chair_cost1 + chair_cost2
+sum_chair_quantity = store[goods['Стул']][0]['quantity'] + store[goods['Стул']][1]['quantity'] + store[goods['Стул']][2]['quantity']
+print('Стул -', sum_chair_quantity, 'шт, стоимость', sum_chair_cost, 'руб')
 ##########################################################################################
 # ВНИМАНИЕ! После того как __ВСЯ__ домашняя работа сделана и запушена на сервер,         #
 # нужно зайти в ЛМС (LMS - Learning Management System ) по адресу http://go.skillbox.ru  #
