@@ -25,20 +25,14 @@ point = (23, 34)
 #       квадратный корень - это возведение в степень 0.5
 #       операции сравнения дают булевы константы True и False
 radius_xy = (point[0] ** 2 + point[1] ** 2) ** .5
-if radius_xy <= radius:  # TODO (radius_xy <= radius) это условие само по себе может быть равно либо True либо False
-    print('True')  # TODO Поэтому можно избежать лишнего кода и писать сразу print(radius_xy <= radius)
-else:
-    print('False')
+print(radius_xy <= radius)
 
 # Аналогично для другой точки
 point_2 = (30, 30)
 # Если точка point_2 лежит внутри круга (radius = 42), то выведите на консоль True,
 # Или False, если точка лежит вовне круга.
 radius2_xy = (point_2[0] ** 2 + point_2[1] ** 2) ** .5
-if radius2_xy <= radius:
-    print('True')  # TODO И тут
-else:
-    print('False')
+print(radius2_xy <= radius)
 
 # Пример вывода на консоль:
 #
