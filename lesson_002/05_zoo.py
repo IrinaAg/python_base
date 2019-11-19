@@ -25,4 +25,6 @@ print(zoo)
 # Номера при выводе должны быть понятны простому человеку, не программисту.
 number_cell_lion = (zoo.index('lion')) + 1
 number_cell_lark = (zoo.index('lark')) + 1
-print('Клетке номер', number_cell_lion,'сидит лев и в клетке номер', number_cell_lark, 'сидит жаворонок.')
+print('Клетке номер', number_cell_lion, 'сидит лев и в клетке номер', number_cell_lark, 'сидит жаворонок.')
+
+#зачет!

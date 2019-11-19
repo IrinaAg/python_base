@@ -41,3 +41,4 @@ print(radius2_xy <= radius)
 # False
 
 
+#зачет!
