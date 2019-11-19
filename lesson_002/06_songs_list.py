@@ -41,5 +41,8 @@ violator_songs_dict = {
 
 # распечатайте общее время звучания трех песен: 'Sweetest Perfection', 'Policy of Truth' и 'Blue Dress'
 #   А другие три песни звучат ХХХ минут
-sum_songs_dict = violator_songs_dict['Sweetest Perfection'] + violator_songs_dict['Policy of Truth'] + violator_songs_dict['Blue Dress']
+sum_songs_dict = (violator_songs_dict['Sweetest Perfection']
+                  + violator_songs_dict['Policy of Truth']
+                  + violator_songs_dict['Blue Dress'])
 print('А другие три песни звучат', round(sum_songs_dict, 2), 'минут')
+#зачет!

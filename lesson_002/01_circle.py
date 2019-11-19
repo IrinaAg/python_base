@@ -25,8 +25,8 @@ point = (23, 34)
 #       квадратный корень - это возведение в степень 0.5
 #       операции сравнения дают булевы константы True и False
 radius_xy = (point[0] ** 2 + point[1] ** 2) ** .5
-if radius_xy <= radius:
-    print('True')
+if radius_xy <= radius:  # TODO (radius_xy <= radius) это условие само по себе может быть равно либо True либо False
+    print('True')  # TODO Поэтому можно избежать лишнего кода и писать сразу print(radius_xy <= radius)
 else:
     print('False')
 
@@ -36,7 +36,7 @@ point_2 = (30, 30)
 # Или False, если точка лежит вовне круга.
 radius2_xy = (point_2[0] ** 2 + point_2[1] ** 2) ** .5
 if radius2_xy <= radius:
-    print('True')
+    print('True')  # TODO И тут
 else:
     print('False')
 
