@@ -10,5 +10,13 @@
 #   Студенту надо попросить ХХХ.ХХ рублей
 
 educational_grant, expenses = 10000, 12000
-
-# TODO здесь ваш код
+difference_sum_first_month = expenses - educational_grant
+month = 0
+expenses_percent = 0
+while month < 9:
+    expenses = expenses * 1.03
+    expenses_percent += expenses
+    month += 1
+difference_sum = difference_sum_first_month + expenses_percent
+insufficient_sum = difference_sum - (10 * educational_grant)
+print('Студенту надо попросить', round(insufficient_sum, 2), 'рублей')
