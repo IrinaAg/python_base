@@ -56,21 +56,22 @@ store = {
 
 
 for key in goods:
-    print(goods[key])
+    print(goods[key], key)
     cost = 0
     quantity = 0
-    #lst_good = []
-    #lst_good.extend(goods) #список товаров
-    #print(lst_good)
+    lst_good = []
+    lst_good.extend(goods) #список товаров
+    print(lst_good)
     for key, val in store.items():
+        print(store[key][0]['quantity'])
         print(val)
-        #print(store[key][0]['quantity'])
 
 
 
 
-        #lamps_cost = store['12345'][0]['quantity'] * store['12345'][0]['price']  #TODO не понимаю как можно в цикле посчитать кол-во и
-        #table_sum_quantity = store['23456'][0]['quantity'] + store['23456'][1]['quantity']      # стоимость товара
+
+        #lamps_cost = store['12345'][0]['quantity'] * store['12345'][0]['price']  #TODO не понимаю как можно в цикле посчитать кол-во и стоимость товара
+        #table_sum_quantity = store['23456'][0]['quantity'] + store['23456'][1]['quantity']
         #table_cost = store['23456'][0]['quantity'] * store['23456'][0]['price']
         #table_cost1 = store['23456'][1]['quantity'] * store['23456'][1]['price']
         #table_cost_sum = table_cost + table_cost1
