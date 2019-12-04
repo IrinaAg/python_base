@@ -37,3 +37,4 @@ for i, item in enumerate(rainbow_colors):
     sd.circle(center_position=start, radius=radius, color=item, width=width)
 
 sd.pause()
+#зачет!

@@ -13,6 +13,7 @@ import simple_draw as sd
 def smile(coordinate_x, coordinate_y, color):
     r = 60
     eye = r // 8
+    # TODO Функция не должна обращаться ко внешним переменным
     sd.circle(center_position=point, radius=r, color=color, width=1)
     sd.circle(center_position=eye_left, radius=eye, color=color, width=1)
     sd.circle(center_position=eye_right, radius=eye, color=color, width=1)
@@ -24,6 +25,7 @@ def smile(coordinate_x, coordinate_y, color):
 for _ in range(10):
     coordinate_x, coordinate_y = 300, 300
     point = sd.random_point()
+    # TODO Эти точки надо получать внутри функции
     eye_left = sd.get_point(point.x-25, point.y+20)
     eye_right = sd.get_point(point.x+25, point.y+20)
     start_point = sd.get_point(point.x-45, point.y-10)

@@ -10,7 +10,7 @@
 #   Студенту надо попросить ХХХ.ХХ рублей
 
 educational_grant, expenses = 10000, 12000
-difference_sum_first_month = expenses - educational_grant
+difference_sum_first_month = expenses - educational_grant  # TODO Первый грант в 10 000
 month = 0
 expenses_percent = 0
 while month < 9:
@@ -18,5 +18,5 @@ while month < 9:
     expenses_percent += expenses
     month += 1
 difference_sum = difference_sum_first_month + expenses_percent
-insufficient_sum = difference_sum - (10 * educational_grant)
+insufficient_sum = difference_sum - (10 * educational_grant)  # TODO Ещё 10 грантов по 10 000, кажется один лишний.
 print('Студенту надо попросить', round(insufficient_sum, 2), 'рублей')
