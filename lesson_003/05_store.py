@@ -53,33 +53,32 @@ store = {
 #         подсчет количества товара
 #         подсчет стоимости товара
 #     вывод на консоль количества и стоимости товара на складе
-
+# TODO Обратите внимание на алгоритм, расписанный выше
 
 for key in goods:
+    # TODO Тут лучше испльзовать метод .items() и 2 переменные цикла
+    # TODO Пример for a, b in dict.items()
+    # TODO Тогда в "a" будет ключ, а в "b" - значение по этому ключу
+    # TODO Которое можно будет использовать для получения списка ниже
     print(goods[key], key)
     cost = 0
     quantity = 0
     lst_good = []
-    lst_good.extend(goods) #список товаров
+    lst_good.extend(goods)  # список товаров
     print(lst_good)
-    for key, val in store.items():
+    for key, val in store.items():  # TODO Этот же цикл должен идти по списку товаров
+        # TODO Доступ к которому мы получаем с помощью ключа из первого цикла
+        # TODO А проходя циклом по списку мы уже можем считать количество и стоимость
+        # TODO Получая к ним доступ по ключам (элементы списка - словари)
         print(store[key][0]['quantity'])
         print(val)
 
+        # lamps_cost = store['12345'][0]['quantity'] * store['12345'][0]['price']  #
+        # не понимаю как можно в цикле посчитать кол-во и стоимость товара
+        # table_sum_quantity = store['23456'][0]['quantity'] + store['23456'][1]['quantity']
+        # table_cost = store['23456'][0]['quantity'] * store['23456'][0]['price']
+        # table_cost1 = store['23456'][1]['quantity'] * store['23456'][1]['price']
+        # table_cost_sum = table_cost + table_cost1
 
-
-
-
-        #lamps_cost = store['12345'][0]['quantity'] * store['12345'][0]['price']  #TODO не понимаю как можно в цикле посчитать кол-во и стоимость товара
-        #table_sum_quantity = store['23456'][0]['quantity'] + store['23456'][1]['quantity']
-        #table_cost = store['23456'][0]['quantity'] * store['23456'][0]['price']
-        #table_cost1 = store['23456'][1]['quantity'] * store['23456'][1]['price']
-        #table_cost_sum = table_cost + table_cost1
-
-
-#print(lst_good[0], '-', store['12345'][0]['quantity'], 'шт', 'стоимость', lamps_cost, 'руб')
-#print(lst_good[1], '-', table_sum_quantity, 'шт', 'стоимость', table_cost_sum, 'руб')
-
-
-
-
+# print(lst_good[0], '-', store['12345'][0]['quantity'], 'шт', 'стоимость', lamps_cost, 'руб')
+# print(lst_good[1], '-', table_sum_quantity, 'шт', 'стоимость', table_cost_sum, 'руб')

@@ -12,11 +12,12 @@ for _ in range(3):
     sd.circle(center_position=point, radius=radius, width=2)
 
 # Написать функцию рисования пузырька, принммающую 2 (или более) параметра: точка рисовании и шаг
-def bubble(point, step):
+# TODO используйте Code/Reformat code, чтобы исправить ошибки стиля
+def bubble(point, step):  # TODO Кроме прочего здесь нужен параметр для передачи цвета
     radius = 50
     for _ in range(3):
         radius += step
-        sd.circle(center_position=point, radius=radius, width=2)
+        sd.circle(center_position=point, radius=radius, width=2)  # TODO А сюда его надо будет передавать
 
 point = sd.get_point(300, 300)
 bubble(point=point, step=10)
