@@ -20,7 +20,9 @@ paper_x, paper_y = 8, 9
 # paper_x, paper_y = 9, 11
 # (просто раскоментировать нужную строку и проверить свой код)
 
-if paper_x <= envelop_x and paper_y <= envelop_y:  # TODO А если перевернуть лист другими сторонами?
+if paper_x <= envelop_x and paper_y <= envelop_y:
+    print('Да')
+elif paper_y <= envelop_x and paper_x <= envelop_y:
     print('Да')
 else:
     print('Нет')
