@@ -20,3 +20,5 @@ while month < 9:
 difference_sum = difference_sum_first_month + expenses_percent
 insufficient_sum = difference_sum - (9 * first_educational_grant)
 print('Студенту надо попросить', round(insufficient_sum, 2), 'рублей')
+
+#зачет!

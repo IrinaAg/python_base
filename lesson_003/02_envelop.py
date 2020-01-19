@@ -62,3 +62,5 @@ elif brick_z <= hole_x and brick_x <= hole_y or brick_z <= hole_y and brick_x <=
     print('Да')
 else:
     print('Нет')
+
+#зачет!

@@ -39,3 +39,4 @@ for _ in range(10):
 
 
 sd.pause()
+#зачет!
