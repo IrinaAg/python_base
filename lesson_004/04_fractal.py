@@ -115,7 +115,7 @@ def draw_branch(point, angle, length):
 # Возможный результат решения см lesson_004/results/exercise_04_fractal_02.jpg
 
 
-def draw_branch(point, angle, length): # функция как в примере
+def draw_branch(point, angle, length):  # функция как в примере
     if length < 3:
         return
     v1 = sd.get_vector(start_point=point, angle=angle, length=length, width=1)
@@ -134,5 +134,4 @@ draw_branch(point=point_0, angle=90, length=200)
 # sd.random_number()
 
 sd.pause()
-
-
+#зачет!

@@ -33,8 +33,14 @@ snowflake = 0
 
 while True:
     for x, y, size in snowflakes:
+        # TODO Лучшей практикой будет for i, y in enumerate(список):
+        # TODO Так у вас будет доступ и к индексам (i) и к объектам списка
+        # TODO Индексы нужны потому, что при обращении к x, y, size вы изменяете только эти переменные
+        # TODO а значения в списке остаются неизменными.
+        # TODO Чтобы изменить координату в списке придётся обращаться к ней по индексу снежинки[индекс] -= 35 например
         snowflake += 1
-        sd.start_drawing()
+        sd.start_drawing()  # TODO Эту строку надо написать до цикла, вызывать её многократно не стоит
+        # TODO Это как бы метка "отсюда", указывающаяя откуда надо начать рисовать и до finish...
         point = sd.get_point(x, y)
         print(point)
         sd.snowflake(center=point, color=sd.background_color, length=size)
@@ -46,7 +52,13 @@ while True:
         print(point)
         sd.snowflake(center=point, color=sd.COLOR_WHITE, length=size)
         snowflakes.append([x, y, size])
+        # TODO Хм, интересное решение) впервые вижу такой ход
+        # TODO Вам тогда по идее и for не нужен.
+        # TODO Однако затратный он по ресурсам очень. Ведь список расшиярется и делает это бесконечно.
+        # TODO Давайте попробуем использовать только 20 координат, добавленных до начала
         print(snowflakes)
+
+        # TODO Эту вспомогательную часть надо писать после цикла
         sd.finish_drawing()
         sd.sleep(0.1)
         if sd.user_want_exit():

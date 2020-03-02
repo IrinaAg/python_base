@@ -24,6 +24,13 @@ COLOR_PURPLE = (255, 0, 255)
 color = [COLOR_RED, COLOR_ORANGE, COLOR_YELLOW, COLOR_GREEN, COLOR_CYAN, COLOR_BLUE, COLOR_PURPLE]
 
 print('Возможные цвета:', '0 : red', '1 : orange', '2 : yellow', '3 : green', '4 : cyan', '5 : blue', '6 : purple', sep='\n')
+# TODO В этом случае удобнее создать словарь следующей структуры
+# TODO словарь = {'0': {'color_name': 'red', 'sd_name': sd.COLOR_RED},...}
+# TODO Таким образом для каждого цвета у нас будет свой словарь. И у каждого словаря будут одинаковые ключи
+# TODO 'color_name' и 'sd_name'
+# TODO Тогда можно будет легко проверить ввод (user_input in словарь)
+# TODO А если среди ключей есть выбор пользователя - по этому ключу мы получим нужный вложенный словарь
+# TODO А там все ключи одинаковые, можем получить как название цвета, так и sd_цвет
 
 while True:
     user_input = input('Введите желаемый цвет >')
@@ -33,7 +40,7 @@ while True:
     else:
         print("Вы ввели некорректный номер")
 
-
+# TODO все def надо перенести в начало файла
 def triangle(point, angle=25, length=100):
     v1 = sd.get_vector(start_point=point, angle=angle, length=length, width=3)
     v1.draw(color=color[user_input])
