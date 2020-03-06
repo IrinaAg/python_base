@@ -10,7 +10,7 @@ import simple_draw as sd
 # Результат решения см lesson_004/results/exercise_03_shape_select.jpg
 print('Возможные фигуры:', '0 : треугольник', '1 : квадрат', '2 : пятиугольник', '3 : шестиугольник', sep='\n')
 
-
+# TODO все def надо держать в верхенй части программы, а остальной код после всех def
 def draw_figure(point, angle, length):
     for angle in range(0, 360 - angle, angle):
         v = sd.get_vector(start_point=point, angle=angle + 25, length=length, width=3)

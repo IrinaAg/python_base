@@ -13,6 +13,7 @@ import simple_draw as sd
 # sd.get_vector()
 # и константы COLOR_RED, COLOR_ORANGE, COLOR_YELLOW, COLOR_GREEN, COLOR_CYAN, COLOR_BLUE, COLOR_PURPLE
 # Результат решения см lesson_004/results/exercise_02_global_color.jpg
+# TODO все def надо держать в верхенй части программы, а остальной код после всех def
 colors = {
     '0': {'color_name': 'red', 'sd_name': sd.COLOR_RED},
     '1': {'color_name': 'orange', 'sd_name': sd.COLOR_ORANGE},
@@ -22,6 +23,8 @@ colors = {
     '5': {'color_name': 'blue', 'sd_name': sd.COLOR_BLUE},
     '6': {'color_name': 'purple', 'sd_name': sd.COLOR_PURPLE}
 }
+# TODO Этот принт не стоило формировать вручную - лучше использовать цикл
+# TODO Тогда, если мы добавим ещё один цвет в словарь - не нужно будет менять принт вручную
 print('Возможные цвета:', '0 : ' + colors['0']['color_name'], '1 : ' + colors['1']['color_name'],
       '2 : ' + colors['2']['color_name'], '3 : ' + colors['3']['color_name'], '4 : ' + colors['4']['color_name'],
       '5 : ' + colors['5']['color_name'], '6 : ' + colors['6']['color_name'], sep='\n')

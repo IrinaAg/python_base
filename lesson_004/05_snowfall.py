@@ -28,21 +28,21 @@ for _ in range(N):
     size = sd.random_number(10, 30)
     snowflakes.append([x, y, size])
 
-sd.start_drawing()
+sd.start_drawing()  # TODO Эту строку надо добавить перед циклом с рисованием (перед for, внутри while)
 while True:
     for i, y in enumerate(snowflakes):
         point = sd.get_point(snowflakes[i][0], snowflakes[i][1])
         sd.snowflake(center=point, color=sd.background_color, length=snowflakes[i][2])
         snowflakes[i][1] -= 35 * k
         if snowflakes[i][1] < 20:
-            break
+            break  # TODO До добавления снежинок не доходит из-за этого break
             snowdrift.append(snowflakes[i][0], snowflakes[i][1],snowflakes[i][2])
         snowflakes[i][0] += 5 * k
         point = sd.get_point(snowflakes[i][0], snowflakes[i][1])
         sd.snowflake(center=point, color=sd.COLOR_WHITE, length=snowflakes[i][2])
         # if i > 19:
         #     break
-
+        # TODO Эту часть кода ниже надо писать после цикла, а не в нем (измените отступ)
         sd.finish_drawing()
         sd.sleep(0.1)
         if sd.user_want_exit():
