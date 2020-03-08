@@ -28,8 +28,11 @@ import simple_draw as sd
 # Результат решения см lesson_004/results/exercise_01_shapes.jpg
 
 
-def draw_figure(point, angle, length):
-    for angle in range(0, 360 - angle, angle):
+def draw_figure(point, angle, length):  # TODO Полученный параметр
+    for angle in range(0, 360 - angle, angle):  # TODO Тут же переопределяется циклом
+        # TODO Назовите параметр start_angle например и передавайте его напрямую в вектор
+        # TODO angle + start_angle
+        # TODO Тогда фигуру можно будет крутить вокруг заданной точки на нужный угол
         v = sd.get_vector(start_point=point, angle=angle + 25, length=length, width=3)
         v.draw()
         point = v.end_point
@@ -40,7 +43,7 @@ def triangle(point, angle, length):
     draw_figure(point=point, angle=angle, length=length)
 
 
-def square(point, angle=25, length=100, width=3):
+def square(point, angle=25, length=100, width=3):  # TODO Параметр width надо либо использовать, либо удалить
     draw_figure(point=point, angle=angle, length=length)
 
 

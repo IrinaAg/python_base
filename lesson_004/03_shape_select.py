@@ -19,8 +19,9 @@ def draw_figure(point, angle, length):
     sd.line(start_point=point, end_point=point_0, width=3)
 
 
-def triangle(point, angle, length):
-    draw_figure(point=point, angle=360 // 3, length=length)
+def triangle(point, angle, length):  # TODO Задайте стандартное значение этой переменной
+    draw_figure(point=point, angle=360 // 3, length=length)  # TODO И передавайте его сюда вместо 360 // 3
+    # TODO А то сейчас у вас параметр есть - а вы его не используете
 
 
 def square(point, angle, length):
@@ -37,7 +38,7 @@ def hexagon(point, angle, length):
 
 point_0 = sd.get_point(300, 250)
 side = 3
-side = 4
+side = 4  # TODO Эти переменные переписывают друг дружку, что-то из этого надо удалить)
 side = 5
 side = 6
 

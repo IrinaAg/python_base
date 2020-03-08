@@ -15,7 +15,7 @@ import simple_draw as sd
 # и константы COLOR_RED, COLOR_ORANGE, COLOR_YELLOW, COLOR_GREEN, COLOR_CYAN, COLOR_BLUE, COLOR_PURPLE
 # Результат решения см lesson_004/results/exercise_02_global_color.jpg
 
-
+# TODO После зачёта в 01, нужно будет заменить код, остальное всё ок
 def draw_figure(point, angle, length):
     for angle in range(0, 360 - angle, angle):
         v = sd.get_vector(start_point=point, angle=angle + 25, length=length, width=3)

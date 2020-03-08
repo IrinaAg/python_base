@@ -36,13 +36,23 @@ while True:
         point = sd.get_point(snowflakes[i][0], snowflakes[i][1])
         sd.snowflake(center=point, color=sd.COLOR_WHITE, length=snowflakes[i][2])
         if snowflakes[i][1] < 20:
-            snowflakes.append(i)
-            snowflakes.reverse()
+            snowflakes.append(i)  # TODO Для индексов упавших снежинок нужен отдельный список
+            snowflakes.reverse()  # TODO А вот эти разворот списка и удаление в цикле надо вынести из цикла
             for index in range(N):
                 snowflakes.pop()
                 # print(snowflakes)
-        # TODO Эту часть кода ниже надо писать после цикла, а не в нем (измените отступ)
-        # TODO если убираю отступ снежинки падают все сразу, не поочереди
+    # TODO Должна получиться примерно такая структура
+    # TODO цикл для рисования снежинок
+    # TODO     рисование и движение снежинок
+    # TODO finish_drawing() + sleep + if-break
+    # TODO разворот списка
+    # TODO цикл по удалению снежинок, фор индекс ин индекс лист:
+    # TODO     индекс_лист.поп(индекс)
+        # Эту часть кода ниже надо писать после цикла, а не в нем (измените отступ)
+        # если убираю отступ снежинки падают все сразу, не поочереди
+        # TODO Сейчас снежинки вообще не падают, по крайней мере у меня
+        # TODO Эти команды должны выполнятся после цикла, прошедшего по списку
+        # TODO И по сути, снежинки и должны падать все вместе
         sd.finish_drawing()
         sd.sleep(0.1)
         if sd.user_want_exit():
