@@ -27,53 +27,48 @@ import simple_draw as sd
 # sd.line()
 # Результат решения см lesson_004/results/exercise_01_shapes.jpg
 
-# TODO Надо бы подправить стиль - Code/Reformat code
+
 def draw_figure(point, angle, length):
-        for angle in range(0, 360 - angle, angle):
-            v = sd.get_vector(start_point=point, angle=angle + 25, length=length, width=3)
-            v.draw()
-            point = v.end_point
-        sd.line(start_point=point, end_point=point_0, width=3)
+    for angle in range(0, 360 - angle, angle):
+        v = sd.get_vector(start_point=point, angle=angle + 25, length=length, width=3)
+        v.draw()
+        point = v.end_point
+    sd.line(start_point=point, end_point=point_0, width=3)
 
 
 def triangle(point, angle, length):
     draw_figure(point=point, angle=angle, length=length)
 
 
-# TODO все def надо держать в верхенй части программы, а остальной код после всех def
-point_0 = sd.get_point(150, 130)
-side = 3
-triangle(point=point_0, angle=360//side, length=100)
-
-
 def square(point, angle=25, length=100, width=3):
     draw_figure(point=point, angle=angle, length=length)
-
-
-point_0 = sd.get_point(400, 130)
-side = 4
-square(point=point_0, angle=360//side, length=100)
 
 
 def pentagon(point, angle=25, length=100, width=3):
     draw_figure(point=point, angle=angle, length=length)
 
 
-point_0 = sd.get_point(150, 350)
-side = 5
-pentagon(point=point_0, angle=360//side, length=100)
-
-
 def hexagon(point, angle, length=100, width=3):
     draw_figure(point=point, angle=angle, length=length)
 
 
+point_0 = sd.get_point(150, 130)
+side = 3
+triangle(point=point_0, angle=360 // side, length=100)
+
+point_0 = sd.get_point(400, 130)
+side = 4
+square(point=point_0, angle=360 // side, length=100)
+
+point_0 = sd.get_point(150, 350)
+side = 5
+pentagon(point=point_0, angle=360 // side, length=100)
+
 point_0 = sd.get_point(450, 350)
 side = 6
-hexagon(point=point_0, angle=360//side, length=100)
+hexagon(point=point_0, angle=360 // side, length=100)
 
 sd.pause()
-
 
 # Часть 1-бис.
 # Попробуйте прикинуть обьем работы, если нужно будет внести изменения в этот код.
