@@ -24,19 +24,19 @@ def draw_figure(point, angle, length):
     sd.line(start_point=point, end_point=point_0, color=color, width=3)
 
 
-def triangle(point, angle, length):
+def triangle(point, angle=25, length=100):
     draw_figure(point=point, angle=angle, length=length)
 
 
-def square(point, angle=25, length=100, width=3):
+def square(point, angle=25, length=100):
     draw_figure(point=point, angle=angle, length=length)
 
 
-def pentagon(point, angle=25, length=100, width=3):
+def pentagon(point, angle=25, length=100):
     draw_figure(point=point, angle=angle, length=length)
 
 
-def hexagon(point, angle, length=100, width=3):
+def hexagon(point, angle=25, length=100):
     draw_figure(point=point, angle=angle, length=length)
 
 
