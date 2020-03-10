@@ -28,48 +28,41 @@ import simple_draw as sd
 # Результат решения см lesson_004/results/exercise_01_shapes.jpg
 
 
-def draw_figure(point, angle, length):  # TODO Полученный параметр
-    for angle in range(0, 360 - angle, angle):  # TODO Тут же переопределяется циклом
-        # TODO Назовите параметр start_angle например и передавайте его напрямую в вектор
-        # TODO angle + start_angle
-        # TODO Тогда фигуру можно будет крутить вокруг заданной точки на нужный угол
-        v = sd.get_vector(start_point=point, angle=angle + 25, length=length, width=3)
+def draw_figure(point, angle, start_angle, length):
+    for angle in range(0, 360 - angle, angle):
+        v = sd.get_vector(start_point=point, angle=angle + start_angle, length=length, width=3)
         v.draw()
         point = v.end_point
     sd.line(start_point=point, end_point=point_0, width=3)
 
 
-def triangle(point, angle, length):
-    draw_figure(point=point, angle=angle, length=length)
+def triangle(point, angle, start_angle, length):
+    draw_figure(point=point, angle=angle, start_angle=start_angle, length=length)
 
 
-def square(point, angle=25, length=100, width=3):  # TODO Параметр width надо либо использовать, либо удалить
-    draw_figure(point=point, angle=angle, length=length)
+def square(point, angle, start_angle, length):
+    draw_figure(point=point, angle=angle, start_angle=start_angle, length=length)
 
 
-def pentagon(point, angle=25, length=100, width=3):
-    draw_figure(point=point, angle=angle, length=length)
+def pentagon(point, angle, start_angle, length):
+    draw_figure(point=point, angle=angle, start_angle=start_angle, length=length)
 
 
-def hexagon(point, angle, length=100, width=3):
-    draw_figure(point=point, angle=angle, length=length)
+def hexagon(point, angle, start_angle, length):
+    draw_figure(point=point, angle=angle, start_angle=start_angle, length=length)
 
 
 point_0 = sd.get_point(150, 130)
-side = 3
-triangle(point=point_0, angle=360 // side, length=100)
+triangle(point=point_0, angle=120, start_angle=25, length=100)
 
 point_0 = sd.get_point(400, 130)
-side = 4
-square(point=point_0, angle=360 // side, length=100)
+square(point=point_0, angle=90, start_angle=25, length=100)
 
 point_0 = sd.get_point(150, 350)
-side = 5
-pentagon(point=point_0, angle=360 // side, length=100)
+pentagon(point=point_0, angle=72, start_angle=25, length=100)
 
 point_0 = sd.get_point(450, 350)
-side = 6
-hexagon(point=point_0, angle=360 // side, length=100)
+hexagon(point=point_0, angle=60, start_angle=25, length=100)
 
 sd.pause()
 
