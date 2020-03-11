@@ -36,6 +36,14 @@ def draw_figure(point, angle, start_angle, length):
     sd.line(start_point=point, end_point=point_0, width=3)
 
 
+# TODO Все верно, только тут нужно стандартные углы задать, чтобы эти функции рисовали нужную фигуру
+# TODO по трём параметрам
+# Все функции должны принимать 3 параметра:
+# - точка начала рисования
+# - угол наклона
+# - длина стороны
+# TODO другими словами - 3 параметра оставить, angle либо убрать и создавать его внутри функции
+# TODO либо задать ему стандартное значение, чтобы функцию можно было запустить с 3 параметрами
 def triangle(point, angle, start_angle, length):
     draw_figure(point=point, angle=angle, start_angle=start_angle, length=length)
 
@@ -51,7 +59,7 @@ def pentagon(point, angle, start_angle, length):
 def hexagon(point, angle, start_angle, length):
     draw_figure(point=point, angle=angle, start_angle=start_angle, length=length)
 
-
+# TODO После изменений -- скопируйте код в 02 и 03
 point_0 = sd.get_point(150, 130)
 triangle(point=point_0, angle=120, start_angle=25, length=100)
 
