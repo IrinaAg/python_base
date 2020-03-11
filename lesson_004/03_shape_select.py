@@ -11,32 +11,32 @@ import simple_draw as sd
 # Результат решения см lesson_004/results/exercise_03_shape_select.jpg
 
 
-def draw_figure(point, angle, length):
+def draw_figure(point, angle, start_angle, length):
     for angle in range(0, 360 - angle, angle):
-        v = sd.get_vector(start_point=point, angle=angle + 25, length=length, width=3)
+        v = sd.get_vector(start_point=point, angle=angle + start_angle, length=length, width=3)
         v.draw()
         point = v.end_point
     sd.line(start_point=point, end_point=point_0, width=3)
 
 
-def triangle(point, angle, length):
-    draw_figure(point=point, angle=angle, length=length)
+def triangle(point, start_angle, length):
+    draw_figure(point=point, angle=120, start_angle=start_angle, length=length)
 
 
-def square(point, angle, length):
-    draw_figure(point=point, angle=360 // 4, length=length)
+def square(point, start_angle, length):
+    draw_figure(point=point, angle=90, start_angle= start_angle, length=length)
 
 
-def pentagon(point, angle, length):
-    draw_figure(point=point, angle=360 // 5, length=length)
+def pentagon(point, start_angle, length):
+    draw_figure(point=point, angle=72, start_angle=start_angle, length=length)
 
 
-def hexagon(point, angle, length):
-    draw_figure(point=point, angle=360 // 6, length=length)
+def hexagon(point, start_angle, length):
+    draw_figure(point=point, angle=60, start_angle=start_angle, length=length)
 
 
 point_0 = sd.get_point(300, 250)
-side = 3
+
 
 functions = {
     '0': {'func_name': 'треугольник', 'func': triangle},
@@ -52,7 +52,7 @@ while True:
     user_input = input('Введите желаемую фигуру >')
     if user_input in functions:
         function = functions[user_input]['func']
-        function(point=point_0, angle=360 // side, length=100)
+        function(point=point_0, start_angle=25, length=100)
         break
     else:
         print("Вы ввели некорректный номер")
