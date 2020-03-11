@@ -15,29 +15,29 @@ import simple_draw as sd
 # и константы COLOR_RED, COLOR_ORANGE, COLOR_YELLOW, COLOR_GREEN, COLOR_CYAN, COLOR_BLUE, COLOR_PURPLE
 # Результат решения см lesson_004/results/exercise_02_global_color.jpg
 
-# TODO После зачёта в 01, нужно будет заменить код, остальное всё ок
-def draw_figure(point, angle, length):
+
+def draw_figure(point, angle, start_angle, length):
     for angle in range(0, 360 - angle, angle):
-        v = sd.get_vector(start_point=point, angle=angle + 25, length=length, width=3)
+        v = sd.get_vector(start_point=point, angle=angle + start_angle, length=length, width=3)
         v.draw(color=color)
         point = v.end_point
     sd.line(start_point=point, end_point=point_0, color=color, width=3)
 
 
-def triangle(point, angle=25, length=100):
-    draw_figure(point=point, angle=angle, length=length)
+def triangle(point, start_angle, length=100):
+    draw_figure(point=point, angle=120, start_angle=start_angle, length=length)
 
 
-def square(point, angle=25, length=100):
-    draw_figure(point=point, angle=angle, length=length)
+def square(point, start_angle, length=100):
+    draw_figure(point=point, angle=90, start_angle=start_angle, length=length)
 
 
-def pentagon(point, angle=25, length=100):
-    draw_figure(point=point, angle=angle, length=length)
+def pentagon(point, start_angle, length=100):
+    draw_figure(point=point, angle=72, start_angle=start_angle, length=length)
 
 
-def hexagon(point, angle=25, length=100):
-    draw_figure(point=point, angle=angle, length=length)
+def hexagon(point, start_angle, length=100):
+    draw_figure(point=point, angle=60, start_angle=start_angle, length=length)
 
 
 colors = {
@@ -63,19 +63,15 @@ while True:
         print("Вы ввели некорректный номер")
 
 point_0 = sd.get_point(150, 130)
-side = 3
-triangle(point=point_0, angle=360 // side, length=100)
+triangle(point=point_0, start_angle=25, length=100)
 
 point_0 = sd.get_point(400, 130)
-side = 4
-square(point=point_0, angle=360 // side, length=100)
+square(point=point_0, start_angle=25, length=100)
 
 point_0 = sd.get_point(150, 350)
-side = 5
-pentagon(point=point_0, angle=360 // side, length=100)
+pentagon(point=point_0, start_angle=25, length=100)
 
 point_0 = sd.get_point(450, 350)
-side = 6
-hexagon(point=point_0, angle=360 // side, length=100)
+hexagon(point=point_0, start_angle=25, length=100)
 
 sd.pause()
