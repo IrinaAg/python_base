@@ -26,36 +26,35 @@ for _ in range(N):
     y = sd.random_number(620, 650)
     size = sd.random_number(10, 30)
     snowflakes.append([x, y, size])
-    print(snowflakes)
+
 
 while True:
     sd.start_drawing()
     for i, snowflake in enumerate(snowflakes):
-        print(i, snowflake[1])
         point = sd.get_point(snowflake[0], snowflake[1])
         sd.snowflake(center=point, color=sd.background_color, length=snowflake[2])
         snowflake[1] -= 35
+        if snowflake[1] <= 25:
+            drift.append(i)
+            # print(drift)
+            drift.reverse()
+        for index in drift:
+            # print(index)
+            # print(drift)
+            # print(snowflakes)
+            snowflakes.pop(-1)
+            if len(snowflakes) == 0:
+                break
         snowflake[0] += 5
         point = sd.get_point(snowflake[0], snowflake[1])
         sd.snowflake(center=point, color=sd.COLOR_WHITE, length=snowflake[2])
-        if snowflake[1] <= 15:
-            drift.append(i)  # список индексов упавших снежинок, индекс доходит до 19 и опять начинает добавляться c 0
-            # print(drift) #  не могу понять почему так происходить
-            # если убираю отступ снежинки падают все сразу на один шаг, не поочереди
-            # TODO Нужно добавить два действия
-            # TODO 1) Перед циклом обновлять список упавших снежинок
-            # TODO 2) Ниже удалять снежинки, используя индексы из drift
-            # TODO фор индекс ин дрифт
-            # TODO     снежинки.поп(индекс)
-    sd.finish_drawing()
+        # print(snowflakes[i])
+    sd.finish_drawing()  # если убираю отступ снежинки падают все сразу на один шаг
     sd.sleep(0.1)
     if sd.user_want_exit():
         break
-    drift.reverse()
-    print(drift)
-    for index in list(drift):  # TODO Кстати list тут не нужен, дрифт уже является списком
-        drift.pop(-1)
-        # print(index)
+
+
 
 sd.pause()
 
