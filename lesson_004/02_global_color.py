@@ -75,3 +75,5 @@ point_0 = sd.get_point(450, 350)
 hexagon(point=point_0, start_angle=25, length=100)
 
 sd.pause()
+
+#зачет!

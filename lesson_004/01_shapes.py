@@ -96,3 +96,4 @@ hexagon(point=point_0, start_angle=25, length=100)
 
 
 sd.pause()
+#зачет!
