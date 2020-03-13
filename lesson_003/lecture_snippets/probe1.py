@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Есть словарь кодов товаров
+from typing import Dict, List
 
 goods = {
     'Лампа': '12345',
@@ -11,7 +12,7 @@ goods = {
 
 # Есть словарь списков количества товаров на складе.
 
-store = {
+store: Dict[str, List[Dict[str, int]]] = {
     '12345': [
         {'quantity': 27, 'price': 42},
     ],
@@ -54,26 +55,16 @@ store = {
 #         подсчет стоимости товара
 #     вывод на консоль количества и стоимости товара на складе
 
-for good, code in goods.items():
-    quantity = 0
-    price = 0
-    i = store[code][0]['quantity']
-    #print(good, code)
-    lst_good = store[code]
-    lst_good.extend(store[code])  # список товаров
-    #print(lst_good)
-    #print(store['23456'])  # TODO Нам нужен не этот список, а например вот этот:
+for good, cod in goods.items():  # TODO Нэйминг - это огромная проблема на всех уровнях владения пайтоном(да и другими)
+    lst_good = []  # TODO Использовать слова, написанные транслитом - не нужно. Всегда не торопясь подбирайте название
+    lst_good.extend(goods)  # список товаров
+    print(lst_good)  # TODO Нам нужен не этот список, а например вот этот:
     # [
     #     {'quantity': 27, 'price': 42},
     # ]
     for key, val in store.items():
-        quantity = i + 1
-        #price = store[code][i]['quantity'] * store[code][i]['price']
-        print(quantity)
-        #print(price)
-        print(store[code][0]['quantity'])
-       #print(lst_good[1])
-        #print(store['23456'][i+1]['quantity'])
+        # TODO С таким перечислением и цикл был бы не нужен
+        # TODO Обратите внимание на подсказку
         # цикл for по товарам с получением кода и названия товара
         #     инициализация переменных для подсчета количества и стоимости товара
         #     TODO это просто создание переменных, что-то вроде x = 0
@@ -92,19 +83,26 @@ for good, code in goods.items():
         #     TODO Обратите внимание на положение вывода. Он находится во внешнем цикле, ровно после цикла по списку
         #     TODO Это позволит вывести данные, которые мы собрали в цикле по списку
         #     вывод на консоль количества и стоимости товара на складе
-        #print(store['12345'], type(store['12345']))
-        #print(store['12345'][0], type(store['12345'][0]))
-        #print(store['12345'][0]['quantity'], type(store['12345'][0]['quantity']))
 
-'''cost_lamps = store['12345'][0]['quantity'] * store['12345'][0]['price']
+        cost_lamps = store['12345'][0]['quantity'] * store['12345'][0]['price']
         quantity_lamps = store['12345'][0]['quantity']
         cost_table = (store['23456'][0]['quantity'] * store['23456'][0]['price']) + (store['23456'][1]['quantity'] * store['23456'][1]['price'])
         quantity_table = store['23456'][0]['quantity'] + store['23456'][1]['quantity']
         cost_couch = (store['34567'][0]['quantity'] * store['34567'][0]['price']) + (store['34567'][1]['quantity'] * store['34567'][1]['price'])
         quantity_couch = store['34567'][0]['quantity'] + store['34567'][1]['quantity']
         cost_chair = (store['45678'][0]['quantity'] * store['45678'][0]['price']) + (store['45678'][1]['quantity'] * store['45678'][1]['price'] +store['45678'][2]['quantity'] * store['45678'][2]['price'])
-        quantity_chair = store['45678'][0]['quantity'] + store['45678'][1]['quantity'] + store['45678'][2]['quantity']'''
-'''print(lst_good[0], '-', store['12345'][0]['quantity'], 'шт', 'стоимость', cost_lamps, 'руб')
+        quantity_chair = store['45678'][0]['quantity'] + store['45678'][1]['quantity'] + store['45678'][2]['quantity']
+print(lst_good[0], '-', store['12345'][0]['quantity'], 'шт', 'стоимость', cost_lamps, 'руб')
 print(lst_good[1], '-', quantity_table, 'шт', 'стоимость', cost_table, 'руб')
 print(lst_good[2], '-', quantity_couch, 'шт', 'стоимость', cost_couch, 'руб')
-print(lst_good[3], '-', quantity_chair, 'шт', 'стоимость', cost_chair, 'руб')'''
+print(lst_good[3], '-', quantity_chair, 'шт', 'стоимость', cost_chair, 'руб')
+
+for good, code in goods.items():
+    total_price = 0
+    total_quantity = 0
+    key = goods[good]
+    #code = store[key]
+    for val in store[key]:
+        total_price += val['quantity'] * val['price']
+        total_quantity += val['quantity']
+    print(good, '-', total_quantity, 'шт', 'стоимость', total_price, 'руб')
