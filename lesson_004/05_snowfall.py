@@ -34,38 +34,19 @@ while True:
         point = sd.get_point(snowflake[0], snowflake[1])
         sd.snowflake(center=point, color=sd.background_color, length=snowflake[2])
         snowflake[1] -= 35
-        if snowflake[1] <= 25:
+        if snowflake[1] <= 15:
             drift.append(i)
-
-            # TODO Разворот списка и цикл по drift надо вынести из цикла по снежинкам
-            # TODO Если удалять элементы списка, по которому идёт цикл (вы удаляете из snowflakes внутри цикла по нему)
-            # TODO То будут происходить пропуски элементов
-            drift.reverse()
-        for index in drift:
-            snowflakes.pop(-1)
-            if len(snowflakes) == 0:
-                break
         snowflake[0] += 5
         point = sd.get_point(snowflake[0], snowflake[1])
         sd.snowflake(center=point, color=sd.COLOR_WHITE, length=snowflake[2])
-    # TODO Структура примерно такая должна получится(внимание на отступы)
-    # while
-    #     for по снежинкам
-    #         закрашивание -- сдвиг(+добавление индексов упавших снежинок) -- рисование
-    #     for по индексам
-    #         удаление снежинок из списка
-    #     обновление списка с индексами -- TODO Важный этап, иначе индексы будут накапливаться с каждой итерацией
-
-    # TODO Обратите внимание, что удалять надо по индексам, а не (-1), как тут snowflakes.pop(-1)
-    # TODO переменная цикла по-очереди перебирает индексы упавших снежинок, вы эту переменную подставляете
-    # TODO в метод удаления снежинок
-
+    drift.reverse()
+    for index in drift:
+        snowflakes.pop(index)
+    drift = []
     sd.finish_drawing()
     sd.sleep(0.1)
     if sd.user_want_exit():
         break
-
-
 
 sd.pause()
 
