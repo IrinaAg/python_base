@@ -1,4 +1,14 @@
 # -*- coding: utf-8 -*-
+import simple_draw as sd
+
+from lesson_005.morning_in_village.rainbow import rainbow
+from lesson_005.morning_in_village.tree import tree
+from lesson_005.morning_in_village.house import polygon
+from lesson_005.morning_in_village.smile import smile
+from lesson_005.morning_in_village.sun import circle
+from lesson_005.morning_in_village.snowfall import drift
+
+sd.resolution = (1200, 800)
 
 # Создать пакет, в который скопировать функции отрисовки из предыдущего урока
 #  - радуги
@@ -18,8 +28,14 @@
 # пример см. lesson_005/results/04_painting.jpg
 # Приправить своей фантазией по вкусу (коты? коровы? люди? трактор? что придумается)
 
-# TODO здесь ваш код
+drift()
+rainbow()
+tree()
+polygon()
+smile()
+circle()
 
+sd.pause()
 # Усложненное задание (делать по желанию)
 # Анимировать картину.
 # Пусть слева идет снегопад, радуга переливается цветами, смайлик моргает, солнце крутит лучами, етс.
