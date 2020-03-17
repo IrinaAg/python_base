@@ -42,3 +42,5 @@ cucumber()
 tomato()
 ketchup()
 cheese()
+
+#зачет!

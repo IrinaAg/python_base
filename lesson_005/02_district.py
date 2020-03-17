@@ -19,3 +19,5 @@ district_residents = cent_st_h1_r1 + cent_st_h1_r2 + cent_st_h2_r1 + cent_st_h2_
 
 print(', '.join(district_residents))
 
+
+#зачет!
