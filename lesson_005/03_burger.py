@@ -26,7 +26,8 @@ from lesson_005.my_burger import onion
 from lesson_005.my_burger import flavoring
 from lesson_005.my_burger import salad
 from lesson_005.my_burger import ketchup
-
+# TODO Здесь можно упростить импорт ещё сильнее
+# TODO можно использовать from .. import func1, func2, func3...
 # burger_buns()
 # cutlets()
 # cucumber()

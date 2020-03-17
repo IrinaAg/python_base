@@ -7,7 +7,7 @@ from lesson_005.morning_in_village.house import polygon
 from lesson_005.morning_in_village.smile import smile
 from lesson_005.morning_in_village.sun import circle
 from lesson_005.morning_in_village.snowfall import drift
-
+# TODO Убрать lesson 005 и будет отлично
 sd.resolution = (1200, 800)
 
 # Создать пакет, в который скопировать функции отрисовки из предыдущего урока
