@@ -35,11 +35,13 @@ def screen_reach_numbers():
     for i, snowflake in enumerate(snowflakes):
         if snowflakes[i][1] <= 15:
             drift.append(i)
-            return drift
+            return drift  # TODO Ретурн прерывает и цикл и функцию
+        # TODO Нужно сперва заполнить список, дать циклу закончиться и только потом вызывать return
+    # TODO Вот на этом уровне отступа
 
 
 def remove_snowflakes():
     drift.reverse()
     for index in drift:
         snowflakes.pop(index)
-        return drift
+        return drift  # TODO И здесь, уровень отступа подправить

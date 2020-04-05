@@ -58,7 +58,9 @@ def input_number():
 
 
 answers = get_all_answer()
-player = input_number()
+player = input_number()  # TODO А зачем нужна эта строка?
+
+# TODO Здесь стоит добавить ещё один цикл
 enemy = get_one_answer(answers)
 
 while True:
@@ -69,4 +71,9 @@ while True:
     print('Быки:', bulls, 'Коровы:', cows)
     if bulls == 4:
         print('Хотите еще партию?')
+        # TODO А этот вопрос расположить как раз во внешнем цикле
+        # TODO Тогда если пользователь введет "нет" - можно будет вызвать break и закончить игру
+        # TODO А если введет что-то другое - пойдет новая итерация цикла, будет загадано новое число
+        # TODO И начнётся новая игра
         break
+
