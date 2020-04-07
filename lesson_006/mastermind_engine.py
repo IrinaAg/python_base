@@ -11,7 +11,7 @@ def get_all_answer():
     ans = []
     for i in range(10000):
         tmp = str(i).zfill(4)
-        if len(set(map(int, tmp))) == 4:  # TODO Тут ещё надо проверить, чтобы 0 не попадал на первое место
+        if len(set(map(int, tmp))) == 4 and '0' not in tmp[0]:
             ans.append(list(map(int, tmp)))
     return ans
 
@@ -30,4 +30,3 @@ def check(nums, one):
             else:
                 cows += 1
     return bulls, cows
-

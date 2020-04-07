@@ -49,7 +49,9 @@ from mastermind_engine import get_all_answer, get_one_answer, check
 def input_number():
     while True:
         nums = input('Введите 4 неповторяющиеся цифры: ')
-        if len(nums) != 4 or not nums.isdigit():  # TODO Тут ещё надо проверить, чтобы 0 не попадал на первое место
+        if len(nums) != 4 or not nums.isdigit():
+            continue
+        if '0' in nums[0]:
             continue
         nums = list(map(int, nums))
         if len(set(nums)) == 4:
@@ -63,6 +65,7 @@ enemy = get_one_answer(answers)
 
 def main():
     while True:
+        count = 0
         print('=' * 15, 'Ход игрока', '=' * 15)
         print('Угадайте число компьютера')
         number = input_number()
@@ -75,7 +78,7 @@ def main():
 while True:
     input_word = input('Хотите еще партию?')
     result = str(input_word)
-    if 'нет' in result:
+    if 'нет' in result or 'Нет' in result:
         break
     else:
         main()
