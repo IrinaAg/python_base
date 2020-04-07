@@ -11,7 +11,7 @@ def get_all_answer():
     ans = []
     for i in range(10000):
         tmp = str(i).zfill(4)
-        if len(set(map(int, tmp))) == 4:
+        if len(set(map(int, tmp))) == 4:  # TODO Тут ещё надо проверить, чтобы 0 не попадал на первое место
             ans.append(list(map(int, tmp)))
     return ans
 

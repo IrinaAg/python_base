@@ -49,7 +49,7 @@ from mastermind_engine import get_all_answer, get_one_answer, check
 def input_number():
     while True:
         nums = input('Введите 4 неповторяющиеся цифры: ')
-        if len(nums) != 4 or not nums.isdigit():
+        if len(nums) != 4 or not nums.isdigit():  # TODO Тут ещё надо проверить, чтобы 0 не попадал на первое место
             continue
         nums = list(map(int, nums))
         if len(set(nums)) == 4:

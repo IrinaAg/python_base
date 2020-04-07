@@ -28,7 +28,7 @@ while True:
     draw_snowflakes_color()
     #  если есть номера_достигших_низа_экрана() то
     if screen_reach_numbers():
-    #       удалить_снежинки(номера)
+        #       удалить_снежинки(номера)
         remove_snowflakes()
     #       создать_снежинки(count)
     sd.finish_drawing()

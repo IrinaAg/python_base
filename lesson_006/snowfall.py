@@ -36,7 +36,8 @@ def screen_reach_numbers():
         if snowflakes[i][1] <= 15:
             drift.append(i)
             print(drift)
-        drift.reverse()
+        drift.reverse()  # TODO Переворачивать внутри цикла не нужно - это перемешает индексы
+        # TODO Либо переворот использовать после цикла, либо в remove_snowflakes, как было ранее
     return drift
 
 
