@@ -7,7 +7,6 @@
 import simple_draw as sd
 
 snowflakes = []
-drift = []
 N = 20
 
 
@@ -32,16 +31,16 @@ def shift_snowflakes():
 
 
 def screen_reach_numbers():
-    global drift  # TODO Проблема была в том, что в drift оставались индексы удаленных снежинок
+    global drift
     drift = []
     for i, snowflake in enumerate(snowflakes):
         if snowflakes[i][1] <= 15:
-            drift.append(i)  # тут ошибки не увидел
+            drift.append(i)
     return drift
 
 
 def remove_snowflakes():
     drift.reverse()
-    for index in drift:  # TODO Ошибка вылезала тут
+    for index in drift:
         snowflakes.pop(index)
     return drift
