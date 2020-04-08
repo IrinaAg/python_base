@@ -65,7 +65,6 @@ enemy = get_one_answer(answers)
 
 def main():
     while True:
-        count = 0
         print('=' * 15, 'Ход игрока', '=' * 15)
         print('Угадайте число компьютера')
         number = input_number()
@@ -78,8 +77,7 @@ def main():
 while True:
     input_word = input('Хотите еще партию?')
     result = str(input_word)
-    if 'нет' in result or 'Нет' in result:
-        # TODO В таком случае удобнее делать так if result in ['нет', 'Нет', 'No'...]
+    if result in ['нет', 'Нет', 'No', 'NO', 'no']:
         break
     else:
         main()
