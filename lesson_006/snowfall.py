@@ -32,14 +32,16 @@ def shift_snowflakes():
 
 
 def screen_reach_numbers():
+    global drift  # TODO Проблема была в том, что в drift оставались индексы удаленных снежинок
+    drift = []
     for i, snowflake in enumerate(snowflakes):
         if snowflakes[i][1] <= 15:
-            drift.append(i) # TODO не могу понять, почему не проходит по всему списку снежинок и вылетает ошибка
+            drift.append(i)  # тут ошибки не увидел
     return drift
 
 
 def remove_snowflakes():
     drift.reverse()
-    for index in drift:
+    for index in drift:  # TODO Ошибка вылезала тут
         snowflakes.pop(index)
     return drift

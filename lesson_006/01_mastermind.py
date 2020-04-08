@@ -79,6 +79,7 @@ while True:
     input_word = input('Хотите еще партию?')
     result = str(input_word)
     if 'нет' in result or 'Нет' in result:
+        # TODO В таком случае удобнее делать так if result in ['нет', 'Нет', 'No'...]
         break
     else:
         main()
