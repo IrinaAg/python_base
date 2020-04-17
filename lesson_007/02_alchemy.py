@@ -29,10 +29,10 @@ class Water:
             return Storm()
         elif isinstance(other, Fire):
             return Steam()
-        else:
-            isinstance(other, Earth)  # TODO эта строка ничего не делает, хотя лучше бы эту проверку использовать
-            # TODO в elif, а в else отправить все неправильные варианты и возвращать None
+        elif isinstance(other, Earth):
             return Dirt()
+        else:
+            return None
 
     def __str__(self):
         return self.name
@@ -47,9 +47,10 @@ class Air:
             return Lightning()
         elif isinstance(other, Water):
             return Storm()
-        else:
-            isinstance(other, Earth)
+        elif isinstance(other, Earth):
             return Dust()
+        else:
+            return None
 
     def __str__(self):
         return self.name
@@ -64,9 +65,10 @@ class Fire:
             return Lava()
         elif isinstance(other, Air):
             return Lightning()
-        else:
-            isinstance(other, Water)
+        elif isinstance(other, Water):
             return Steam()
+        else:
+            return None
 
     def __str__(self):
         return self.name
@@ -81,9 +83,10 @@ class Earth:
             return Dirt()
         elif isinstance(other, Fire):
             return Lava()
-        else:
-            isinstance(other, Air)
+        elif isinstance(other, Air):
             return Dust()
+        else:
+            return None
 
     def __str__(self):
         return self.name
