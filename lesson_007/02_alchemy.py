@@ -30,7 +30,8 @@ class Water:
         elif isinstance(other, Fire):
             return Steam()
         else:
-            isinstance(other, Earth)
+            isinstance(other, Earth)  # TODO эта строка ничего не делает, хотя лучше бы эту проверку использовать
+            # TODO в elif, а в else отправить все неправильные варианты и возвращать None
             return Dirt()
 
     def __str__(self):

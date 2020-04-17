@@ -86,18 +86,24 @@ flakes = get_flakes(count=N)  # создать список снежинок
 
 
 def get_fallen_flakes():
-    fallen_flakes = []
+    fallen_flakes = []  # TODO в данной реализации вы не используете список упавших снежинок
     count = 0
     for flake in flakes:
         if not flake.can_fall():
             count += 1
-            fallen_flakes.append(Snowflake())
+            fallen_flakes.append(Snowflake())  # TODO К тому же стоило бы собирать индексы упавших снежинок
+            # TODO А вы создаете новые объекты-снежинки, которые никак не связаны с упавшими.
     # print(count)
     # print(fallen_flakes)
     return count
+# TODO Поступить можно 2 способами
+# TODO Простой - убрать список упавших снежинок, оставить счётчик
+# TODO Но тогда нужно изменить метод move, чтобы он двигал снежинки, только если они не вышли за границу экрана
+# TODO Сложный - собирать в список индексы снежинок. Добавить метод, который будет принимать этот список,
+# TODO разворачивать и запускать по нему цикл, чтобы по индексам удалять объекты-снежинки из списка flakes
 
-
-def append_flakes(count):
+def append_flakes(count):  # TODO Кстати здесь вы передаете число, но никак его не используете
+    # TODO Стоит добавить цикл, который будет повторять добавление снежинок count-раз
     flakes.append(Snowflake())
     # print(flakes)
 
