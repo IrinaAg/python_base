@@ -93,11 +93,9 @@ class Man:
 
     def pick_up(self, cat):
         cprint('{} подобрал кота'.format(self.name), color='cyan')
-        self.cat = cat
-        # TODO 1) Не хватает ещё одного действия, добавления коту своего дома. Для этого надо изменить атрибут кот.хаус
-        # TODO на селф.хаус
-        # TODO 2) Вместо простой переменной у человека self.cat лучше создать список-атрибут и добавлять кота туда.
-        # TODO Чтобы в итоге можно было несколько котов подряд добавить
+        cat.house = self.house
+        pets = []
+        pets.append(cat)
 
     def act(self):
         if self.fullness <= 0:
@@ -185,7 +183,9 @@ citizens = [
 ]
 
 pets = [
-    Cat(name='Котик', house=my_sweet_home)
+    Cat(name='Котик', house=my_sweet_home),
+    Cat(name='Пушок', house=my_sweet_home),
+    Cat(name='Морковка', house=my_sweet_home)
 ]
 
 
