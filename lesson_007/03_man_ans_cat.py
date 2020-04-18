@@ -42,7 +42,7 @@ class Man:
         self.name = name
         self.fullness = 50
         self.house = None
-        self.cat = None  # TODO список self.pets = [] создавать надо тут
+        self.pets = []
 
     def __str__(self):
         return 'Я - {}, сытость {}'.format(
@@ -57,9 +57,10 @@ class Man:
             cprint('{} нет еды'.format(self.name), color='red')
 
     def work(self):
-        cprint('{} сходил на работу'.format(self.name), color='blue')
-        self.house.money += 150
-        self.fullness -= 10
+        if self.house.money <= 100:
+            cprint('{} сходил на работу'.format(self.name), color='blue')
+            self.house.money += 150
+            self.fullness -= 10
 
     def watch_mtv(self):
         cprint('{} смотрел MTV целый день'.format(self.name), color='green')
@@ -94,8 +95,7 @@ class Man:
     def pick_up(self, cat):
         cprint('{} подобрал кота'.format(self.name), color='cyan')
         cat.house = self.house
-        pets = []
-        pets.append(cat)  # TODO А здесь только добавлять в него self.pets
+        self.pets.append(self.pets)
 
     def act(self):
         if self.fullness <= 0:
@@ -106,7 +106,7 @@ class Man:
             self.eat()
         elif self.house.food < 20:
             self.shopping()
-        elif self.house.cat_food < 10:
+        elif self.house.cat_food < 30:
             self.shopping_cat_food()
         elif self.house.money < 50:
             self.work()
