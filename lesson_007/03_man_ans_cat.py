@@ -42,7 +42,7 @@ class Man:
         self.name = name
         self.fullness = 50
         self.house = None
-        self.cat = None
+        self.cat = None  # TODO список self.pets = [] создавать надо тут
 
     def __str__(self):
         return 'Я - {}, сытость {}'.format(
@@ -95,7 +95,7 @@ class Man:
         cprint('{} подобрал кота'.format(self.name), color='cyan')
         cat.house = self.house
         pets = []
-        pets.append(cat)
+        pets.append(cat)  # TODO А здесь только добавлять в него self.pets
 
     def act(self):
         if self.fullness <= 0:

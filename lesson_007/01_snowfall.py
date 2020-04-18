@@ -162,11 +162,13 @@ def get_fallen_flakes():
             fallen_flakes.append(i)
     # print(count)
     print(fallen_flakes)
-    return count
+    return count  # TODO Здесь вы возвращаете число и его пытаетесь передать вместо списка в remove
+# TODO Попробуйте убрать count, а возвращать здесь fallen_flakes
 
 
 def remove_flakes(fallen_flakes):
-    fallen_flakes.reverse() # TODO не разворачивается список с индексами упавших снежинок
+    fallen_flakes.reverse()  # не разворачивается список с индексами упавших снежинок
+    # TODO Проблема в том, что вы передаете в эту функцию не список, а номер int
     for index in fallen_flakes:
         flakes.pop(index)
     return fallen_flakes
@@ -175,8 +177,6 @@ def remove_flakes(fallen_flakes):
 def append_flakes(count):
     for _ in flakes:
         flakes.append(count)
-    print(flakes)
-    print(count)
 
 
 while True:
@@ -187,7 +187,8 @@ while True:
     fallen_flakes = get_fallen_flakes()  # подчитать сколько снежинок уже упало
     if fallen_flakes:
         remove_flakes(fallen_flakes)
-        append_flakes(count=fallen_flakes)  # добавить еще сверху
+        append_flakes(count=fallen_flakes)  # TODO Когда fallen_flakes будет списком, в append надо
+        # TODO будет передавать len(fallen_flakes)
     sd.sleep(0.1)
     if sd.user_want_exit():
         break
