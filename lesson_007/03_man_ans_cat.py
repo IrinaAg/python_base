@@ -95,8 +95,7 @@ class Man:
     def pick_up(self, cat):
         cprint('{} подобрал кота'.format(self.name), color='cyan')
         cat.house = self.house
-        self.pets.append(self.pets)  # TODO Список добавлять в себя же - это смело!)
-        # TODO но добавлять надо cat, а не self.pets
+        self.pets.append(cat)
 
     def act(self):
         if self.fullness <= 0:
@@ -130,7 +129,7 @@ class House:
         self.dirt = 0
 
     def __str__(self):
-        return 'В доме еды осталось {}, денег осталось {}, еды для кота {}'.format(self.food, self.money, self.cat_food)
+        return 'В доме еды осталось {}, денег осталось {}, еды для котов {}'.format(self.food, self.money, self.cat_food)
 
 
 class Cat:
