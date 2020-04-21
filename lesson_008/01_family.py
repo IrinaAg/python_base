@@ -69,16 +69,16 @@ class Husband:
          # return super().__str__()
 
     def eat(self):
-        if self.house.food >= 10:
+        if self.house.food >= 30:
             cprint('{} поел'.format(self.name), color='yellow')
-            self.fullness += 10
-            self.house.food -= 10
-            Husband.total_eat += 10
+            self.fullness += 30
+            self.house.food -= 30
+            Husband.total_eat += 30
         else:
             cprint('{} нет еды'.format(self.name), color='red')
 
     def work(self):
-        if self.house.money <= 400:
+        if self.house.money <= 500:
             cprint('{} сходил на работу'.format(self.name), color='blue')
             self.house.money += 150
             self.fullness -= 10
@@ -125,7 +125,7 @@ class Wife:
     total_eat = 0
 
     def __init__(self, name):
-        super().__init__()
+        # super().__init__()
         self.name = name
         self.fullness = 30
         self.happiness = 100
@@ -137,17 +137,17 @@ class Wife:
          # return super().__str__()
 
     def eat(self):
-        if self.house.food >= 10:
+        if self.house.food >= 30:
             cprint('{} поела'.format(self.name), color='yellow')
-            self.fullness += 10
-            self.house.food -= 10
-            Wife.total_eat += 10
+            self.fullness += 30
+            self.house.food -= 30
+            Wife.total_eat += 30
 
     def shopping(self):
-        if self.house.money >= 50:
+        if self.house.money >= 70:
             cprint('{} сходил в магазин за едой'.format(self.name), color='magenta')
-            self.house.money -= 50
-            self.house.food += 50
+            self.house.money -= 70
+            self.house.food += 70
             self.happiness -= 10
             self.fullness -= 10
         else:
@@ -197,34 +197,34 @@ class Wife:
             self.eat()
 
 
-home = House()
-serge = Husband(name='Сережа')
-masha = Wife(name='Маша')
-
-citizens = [
-    serge,
-    masha
-]
-
-for citizen in citizens:
-    citizen.go_to_the_house(house=home)
-
-for day in range(1, 366):
-    cprint('================== День {} =================='.format(day), color='red')
-    for citizen in citizens:
-        citizen.act()
-    # serge.act()
-    # masha.act()
-    print('----- в конце дня -----')
-    for citizen in citizens:
-        cprint(citizen, color='cyan')
-    cprint(home, color='cyan')
-    # cprint(serge, color='cyan')
-    # cprint(masha, color='cyan')
-    print('---------- За {} дня ----------'.format(day))
-print('Было заработано денег - {}'.format(Husband.total_money))
-print('Было сьедено еды - {}'.format(Husband.total_eat+Wife.total_eat))
-print('Было куплено шуб - {}'.format(Wife.total_fur_coat))
+# home = House()
+# serge = Husband(name='Сережа')
+# masha = Wife(name='Маша')
+#
+# citizens = [
+#     serge,
+#     masha
+# ]
+#
+# for citizen in citizens:
+#     citizen.go_to_the_house(house=home)
+#
+# for day in range(1, 366):
+#     cprint('================== День {} =================='.format(day), color='red')
+#     for citizen in citizens:
+#         citizen.act()
+#     # serge.act()
+#     # masha.act()
+#     print('----- в конце дня -----')
+#     for citizen in citizens:
+#         cprint(citizen, color='cyan')
+#     cprint(home, color='cyan')
+#     # cprint(serge, color='cyan')
+#     # cprint(masha, color='cyan')
+#     print('---------- За {} дня ----------'.format(day))
+# print('Было заработано денег - {}'.format(Husband.total_money))
+# print('Было сьедено еды - {}'.format(Husband.total_eat+Wife.total_eat))
+# print('Было куплено шуб - {}'.format(Wife.total_fur_coat))
 
 
 # TODO Можете приступать к частям 2 и 2бис
@@ -284,24 +284,73 @@ class Cat:
 # степень счастья  - не меняется, всегда ==100 ;)
 
 class Child:
+    total_eat = 0
 
-    def __init__(self):
-        pass
+    def __init__(self, name):
+        self.name = name
+        self.fullness = 30
+        self.happiness = 100
+        self.house = None
 
     def __str__(self):
-        return super().__str__()
+        return ('Я - {}, сытость {}'.format(
+            self.name, self.fullness))# super().__str__()
 
     def act(self):
-        pass
+        dice = randint(1, 6)
+        if self.fullness < 20:
+            self.eat()
+        elif dice == 1:
+            self.sleep()
+        elif dice == 2:
+            self.eat()
+        else:
+            self.sleep()
 
     def eat(self):
-        pass
+        if self.house.food >= 10:
+            cprint('{} поел'.format(self.name), color='yellow')
+            self.fullness += 10
+            self.house.food -= 10
+            Child.total_eat += 10
 
     def sleep(self):
-        pass
+        cprint('{} спит'.format(self.name), color='blue')
+        self.fullness -= 10
+
+    def go_to_the_house(self, house):
+        self.house = house
+        self.fullness -= 10
+        cprint('{} приехал в дом'.format(self.name), color='cyan')
 
 
-# TODO после реализации второй части - отдать на проверку учителем две ветки
+home = House()
+serge = Husband(name='Сережа')
+masha = Wife(name='Маша')
+kolya = Child(name='Коля')
+
+citizens = [
+    serge,
+    masha,
+    kolya
+]
+
+for citizen in citizens:
+    citizen.go_to_the_house(house=home)
+
+for day in range(1, 366):
+    cprint('================== День {} =================='.format(day), color='red')
+    for citizen in citizens:
+        citizen.act()
+    print('----- в конце дня -----')
+    for citizen in citizens:
+        cprint(citizen, color='cyan')
+    cprint(home, color='cyan')
+    print('---------- За {} дня ----------'.format(day))
+print('Было заработано денег - {}'.format(Husband.total_money))
+print('Было сьедено еды - {}'.format(Husband.total_eat+Wife.total_eat+Child.total_eat))
+print('Было куплено шуб - {}'.format(Wife.total_fur_coat))
+
 
 
 ######################################################## Часть третья
