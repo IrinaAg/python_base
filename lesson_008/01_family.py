@@ -3,6 +3,7 @@
 from termcolor import cprint
 from random import randint
 
+
 ######################################################## Часть первая
 #
 # Создать модель жизни небольшой семьи.
@@ -68,7 +69,7 @@ class Husband:
     def __str__(self):
         return ('Я - {}, сытость {}, степень счастья {}'.format(
             self.name, self.fullness, self.happiness))
-         # return super().__str__()
+        # return super().__str__()
 
     def eat(self):
         if self.house.food >= 10:
@@ -142,9 +143,9 @@ class Wife:
         self.house = None
 
     def __str__(self):
-        return('Я - {}, сытость {}, степень счастья {}'.format(
+        return ('Я - {}, сытость {}, степень счастья {}'.format(
             self.name, self.fullness, self.happiness))
-         # return super().__str__()
+        # return super().__str__()
 
     def eat(self):
         if self.house.food >= 10:
@@ -346,8 +347,6 @@ class Child:
         pass
 
 
-# TODO после реализации второй части - отдать на проверку учителем две ветки
-
 
 ######################################################## Часть третья
 #
@@ -355,7 +354,7 @@ class Child:
 # влить в мастер все коммиты из ветки develop и разрешить все конфликты
 # отправить на проверку учителем.
 
-#)
+# )
 #     kolya.act()
 #     murzik.act()
 #     cprint(serge, color='cyan')
@@ -366,7 +365,7 @@ home = House()
 serge = Husband(name='Сережа')
 masha = Wife(name='Маша')
 # kolya = Child(name='Коля')
-murzik = Cat(name='Мурзик',house=home)
+murzik = Cat(name='Мурзик', house=home)
 
 citizens = [
     serge,
@@ -403,9 +402,9 @@ for day in range(1, 366):
     # cprint(murzik, color='cyan')
 print('---------- За {} дня ----------'.format(day))
 print('Было заработано денег - {}'.format(Husband.total_money))
-print('Было сьедено еды - {}'.format(Husband.total_eat+Wife.total_eat))
+print('Было сьедено еды - {}'.format(Husband.total_eat + Wife.total_eat))
 print('Было куплено шуб - {}'.format(Wife.total_fur_coat))
-
+# TODO Ветвь готова к слиянию
 # Усложненное задание (делать по желанию)
 #
 # Сделать из семьи любителей котов - пусть котов будет 3, или даже 5-10.
@@ -427,4 +426,3 @@ print('Было куплено шуб - {}'.format(Wife.total_fur_coat))
 #       for salary in range(50, 401, 50):
 #           max_cats = life.experiment(salary)
 #           print(f'При зарплате {salary} максимально можно прокормить {max_cats} котов')
-
