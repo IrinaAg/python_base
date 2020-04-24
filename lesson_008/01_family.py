@@ -181,7 +181,7 @@ class Wife(Human):
         if self.house.dirt > 90:
             self.happiness -= 10
         if self.fullness <= 0:
-            cprint('{} умерла...'.format(self.name), color='red')
+            cprint('{} умера...'.format(self.name), color='red')
             return
         dice = randint(1, 6)
         if self.fullness <= 20:
@@ -229,11 +229,13 @@ class Wife(Human):
 #     cprint(home, color='cyan')
 #     # cprint(serge, color='cyan')
 #     # cprint(masha, color='cyan')
-# print('---------- За {} дня ----------'.format(day))
+#     print('---------- За {} дня ----------'.format(day))
 # print('Было заработано денег - {}'.format(Husband.total_money))
 # print('Было сьедено еды - {}'.format(Husband.total_eat+Wife.total_eat))
 # print('Было куплено шуб - {}'.format(Wife.total_fur_coat))
 
+
+# TODO Можете приступать к частям 2 и 2бис
 
 ######################################################## Часть вторая
 #
@@ -313,12 +315,14 @@ class Cat:
 # отличия от взрослых - кушает максимум 10 единиц еды,
 # степень счастья  - не меняется, всегда ==100 ;)
 
-class Child(Human):
+class Child:
     total_eat = 0
 
     def __init__(self, name):
-        super().__init__(name=name)
+        self.name = name
+        self.fullness = 30
         self.happiness = 100
+        self.house = None
 
     def __str__(self):
         return super().__str__()
@@ -334,15 +338,21 @@ class Child(Human):
         else:
             self.sleep()
 
+    def eat(self):
+        if self.house.food >= 10:
+            cprint('{} поел'.format(self.name), color='yellow')
+            self.fullness += 10
+            self.house.food -= 10
+            Child.total_eat += 10
+
     def sleep(self):
         cprint('{} спит'.format(self.name), color='blue')
         self.fullness -= 10
 
-######################################################## Часть третья
-#
-# после подтверждения учителем второй части (обоих веток)
-# влить в мастер все коммиты из ветки develop и разрешить все конфликты
-# отправить на проверку учителем.
+    def go_to_the_house(self, house):
+        self.house = house
+        self.fullness -= 10
+        cprint('{} приехал в дом'.format(self.name), color='cyan')
 
 
 home = House()
@@ -351,19 +361,14 @@ masha = Wife(name='Маша')
 kolya = Child(name='Коля')
 murzik = Cat(name='Мурзик', house=home)
 
-members = [
+citizens = [
     serge,
     masha,
     kolya
 ]
 
-for member in members:
-    member.go_to_the_house(house=home)
-serge.pick_up(cat=murzik)
-
-pets = [
-    murzik
-]
+for citizen in citizens:
+    citizen.go_to_the_house(house=home)
 
 for day in range(1, 366):
     cprint('================== День {} =================='.format(day), color='red')
