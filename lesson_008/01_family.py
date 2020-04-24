@@ -385,3 +385,4 @@ print('Было куплено шуб - {}'.format(Wife.total_fur_coat))
 #           max_cats = life.experiment(salary)
 #           print(f'При зарплате {salary} максимально можно прокормить {max_cats} котов')
 
+#зачет!
