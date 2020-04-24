@@ -204,39 +204,6 @@ class Wife(Human):
         else:
             self.eat()
 
-
-# home = House()
-# serge = Husband(name='Сережа')
-# masha = Wife(name='Маша')
-#
-# citizens = [
-#     serge,
-#     masha
-# ]
-#
-# for citizen in citizens:
-#     citizen.go_to_the_house(house=home)
-#
-# for day in range(1, 366):
-#     cprint('================== День {} =================='.format(day), color='red')
-#     for citizen in citizens:
-#         citizen.act()
-#     # serge.act()
-#     # masha.act()
-#     print('----- в конце дня -----')
-#     for citizen in citizens:
-#         cprint(citizen, color='cyan')
-#     cprint(home, color='cyan')
-#     # cprint(serge, color='cyan')
-#     # cprint(masha, color='cyan')
-#     print('---------- За {} дня ----------'.format(day))
-# print('Было заработано денег - {}'.format(Husband.total_money))
-# print('Было сьедено еды - {}'.format(Husband.total_eat+Wife.total_eat))
-# print('Было куплено шуб - {}'.format(Wife.total_fur_coat))
-
-
-# TODO Можете приступать к частям 2 и 2бис
-
 ######################################################## Часть вторая
 #
 # После подтверждения учителем первой части надо
@@ -315,14 +282,11 @@ class Cat:
 # отличия от взрослых - кушает максимум 10 единиц еды,
 # степень счастья  - не меняется, всегда ==100 ;)
 
-class Child:
+class Child(Human):
     total_eat = 0
 
     def __init__(self, name):
-        self.name = name
-        self.fullness = 30
-        self.happiness = 100
-        self.house = None
+        super().__init__(name=name)
 
     def __str__(self):
         return super().__str__()
@@ -361,14 +325,18 @@ masha = Wife(name='Маша')
 kolya = Child(name='Коля')
 murzik = Cat(name='Мурзик', house=home)
 
-citizens = [
+members = [
     serge,
     masha,
     kolya
 ]
 
-for citizen in citizens:
-    citizen.go_to_the_house(house=home)
+pets = [
+    murzik
+]
+
+for member in members:
+    member.go_to_the_house(house=home)
 
 for day in range(1, 366):
     cprint('================== День {} =================='.format(day), color='red')
