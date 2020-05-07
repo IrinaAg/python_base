@@ -34,7 +34,64 @@ import os, time, shutil
 # Чтение документации/гугла по функциям - приветствуется. Как и поиск альтернативных вариантов :)
 # Требования к коду: он должен быть готовым к расширению функциональности. Делать сразу на классах.
 
-# TODO здесь ваш код
+folder_path = '/Users/agafonova/python_base/lesson_009/icons'
+path = '/Users/agafonova/python_base/lesson_009/icons_by_year'
+
+
+class Extract():
+
+    def __init__(self, folder_path):
+        self.folder_path = folder_path
+        self.time_name = []
+
+    def extract(self):
+        for dirpath, dirnames, filenames in os.walk(folder_path):
+            # print('{dirpath:-^40}'.format(dirpath=dirpath))
+            for file in filenames:
+                self.time_file = os.path.join(dirpath, file)
+                self.name = os.path.getmtime(self.time_file)
+                self.time_name = time.gmtime(self.name)
+                # print(self.time_name[])
+                # print('{file}||{time_name}'.format(file=file, time_name=time_name))
+
+    def create(self):
+        self.folder_name = '{tm_year}/{tm_mon}'.format(tm_year=self.time_name.tm_year, tm_mon=self.time_name.tm_mon)
+        if len(self.folder_name) <= 6:
+            self.folder_name = self.folder_name.replace('/','/0')
+        self.new_path = os.path.join(path, self.folder_name)
+        if not os.path.exists(self.new_path):
+            os.makedirs(self.new_path)
+
+    def replication(self):
+        old_image_path = os.path.join(folder_path, self.time_file)
+        new_image_path = os.path.join(self.new_path)
+        shutil.copy2(old_image_path, new_image_path)
+
+
+time_name = Extract(folder_path)
+time_name.extract()
+time_name.create()
+time_name.replication()
+
+# TODO изначально делала не на классах, все работает, но на классах только один файл перемещает
+
+# for dirpath, dirnames, filenames in os.walk(folder_path):
+#     # print('{dirpath:-^40}'.format(dirpath=dirpath))
+#     for file in filenames:
+#         time_file = os.path.join(dirpath, file)
+#         name = os.path.getmtime(time_file)
+#         created = time.gmtime(name)
+#         # print('{file}||{created}'.format(file=file, created=created))
+#         folder_name = '{tm_year}/{tm_mon}'.format(tm_year=created.tm_year, tm_mon=created.tm_mon)
+#         if len(folder_name) <= 6:
+#             folder_name = folder_name.replace('/', '/0')
+#         new_path = os.path.join(path, folder_name)
+#         if not os.path.exists(new_path):
+#             os.makedirs(new_path)
+#         old_image_path = os.path.join(folder_path, time_file)
+#         new_image_path = os.path.join(new_path)
+#         shutil.copy2(old_image_path, new_image_path)
+
 
 # Усложненное задание (делать по желанию)
 # Нужно обрабатывать zip-файл, содержащий фотографии, без предварительного извлечения файлов в папку.
