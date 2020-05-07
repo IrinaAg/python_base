@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import zipfile
 
+
 # Подсчитать статистику по буквам в романе Война и Мир.
 # Входные параметры: файл для сканирования
 # Статистику считать только для букв алфавита (см функцию .isalpha() для строк)
@@ -61,13 +62,17 @@ class Statistics:
 
 
 class Sorted(Statistics):
+    # TODO Тут нужно вынести принт в отдельный метод.
+    # TODO И сортировку тоже. Метод сортировки может например изменять атрибут объекта self.sort_data
+    # TODO А потом можно вызывать метод print_data, который распечатает данные из self.sort_data
     def sort(self):
         print('+' + '-' * 10 + '+' + '-' * 10 + '+')
         print('|{name:^10}|'.format(name='буква'), '{key:^9}|'.format(key='частота'))
         for i in sorted(self.stat.items(), key=lambda para: (para[1], para[0]), reverse=True):
-        # for i in sorted(self.stat.items(), key=lambda para: (para[1], para[0]), reverse=False):
-        # for i in sorted(self.stat.items(), key=lambda para: (para[0], para[1]), reverse=True):
-        # for i in sorted(self.stat.items(), key=lambda para: (para[0], para[1]), reverse=False):
+            # TODO Нужно будет для каждого типа сортировки свой метод сортировки переопределить
+            # for i in sorted(self.stat.items(), key=lambda para: (para[1], para[0]), reverse=False):
+            # for i in sorted(self.stat.items(), key=lambda para: (para[0], para[1]), reverse=True):
+            # for i in sorted(self.stat.items(), key=lambda para: (para[0], para[1]), reverse=False):
             print('+' + '-' * 10 + '+' + '-' * 10 + '+')
             print('|{name:^10}|'.format(name=i[0]), '{key:^9}|'.format(key=i[1]))
         print('+' + '-' * 10 + '+' + '-' * 10 + '+')
@@ -76,10 +81,10 @@ class Sorted(Statistics):
 
 
 statis = Statistics(file_name='voyna-i-mir.txt.zip')
-statis1 = Sorted(Statistics)
+statis1 = Sorted()  # TODO Тут не нужно указывать дополнительно класс-родитель, он уже указан в class Sorted(Statistics)
 statis1.start_method()
-# TODO не могу понять почему вылезает ошибка при раззиповке
-# class Statistics:  TODO если один класс то все работает
+# не могу понять почему вылезает ошибка при раззиповке
+# class Statistics:
 #
 #     def __init__(self, file_name):
 #         self.file_name = file_name

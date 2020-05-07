@@ -52,6 +52,8 @@ class Read:
         file.close()
 
 
+# TODO Тут можно вместо числа 17, 14 и тд использовать атрибут класса.
+# TODO И в каждом наследнике изменять этот атрибут на нужный.
 class Minute(Read):
 
     def minute(self, file_name='events.txt'):
