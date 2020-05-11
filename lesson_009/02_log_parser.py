@@ -52,15 +52,14 @@ class Read:
         file.close()
 
 
-# TODO Тут можно вместо числа 17, 14 и тд использовать атрибут класса.
-# TODO И в каждом наследнике изменять этот атрибут на нужный.
 class Minute(Read):
+    part = 17
 
     def minute(self, file_name='events.txt'):
         with open(file_name, 'r', encoding='cp1251') as file:
             for line in file:
                 if 'NOK' in line:
-                    char = line[1:17]
+                    char = line[1:self.part]
                     if char in self.lines:
                         self.lines[char] += 1
                     else:
@@ -68,12 +67,13 @@ class Minute(Read):
 
 
 class Hour(Read):
+    part = 14
 
     def hour(self, file_name='events.txt'):
         with open(file_name, 'r', encoding='cp1251') as file:
             for line in file:
                 if 'NOK' in line:
-                    char = line[1:14]
+                    char = line[1:self.part]
                     if char in self.lines:
                         self.lines[char] += 1
                     else:
@@ -81,12 +81,13 @@ class Hour(Read):
 
 
 class Month(Read):
+    part = 8
 
     def month(self, file_name='events.txt'):
         with open(file_name, 'r', encoding='cp1251') as file:
             for line in file:
                 if 'NOK' in line:
-                    char = line[1:8]
+                    char = line[1:self.part]
                     if char in self.lines:
                         self.lines[char] += 1
                     else:
@@ -94,12 +95,13 @@ class Month(Read):
 
 
 class Year(Read):
+    part = 5
 
     def year(self, file_name='events.txt'):
         with open(file_name, 'r', encoding='cp1251') as file:
             for line in file:
                 if 'NOK' in line:
-                    char = line[1:5]
+                    char = line[1:self.part]
                     if char in self.lines:
                         self.lines[char] += 1
                     else:
@@ -107,8 +109,8 @@ class Year(Read):
 
 
 read_file = Read(file_name='events.txt')
-read_file1 = Minute(Read)
-read_file1.start_method()
+# read_file1 = Minute(Read)
+# read_file1.start_method()
 
 
 # После выполнения первого этапа нужно сделать группировку событий
@@ -117,8 +119,8 @@ read_file1.start_method()
 # read_file2.start_method()
 
 #  - по месяцу
-# read_file3 = Month(Read)
-# read_file3.start_method()
+read_file3 = Month(Read)
+read_file3.start_method()
 
 #  - по году
 # read_file4 = Year(Read)
