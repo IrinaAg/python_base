@@ -52,8 +52,10 @@ class Read:
         file.close()
 
 
-class Minute(Read):
-    part = 17
+class Minute(Read):  # TODO Та же проблема, что и в прошлом задании
+    # TODO Должен быть один метод, переопределенный в наследниках
+    # TODO Но тут даже метод не нужно переопределять, надо только атрибут переопределить
+    part = 17  # TODO Кстати раз это константа, можно название написать заглавными буквами
 
     def minute(self, file_name='events.txt'):
         with open(file_name, 'r', encoding='cp1251') as file:

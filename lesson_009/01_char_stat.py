@@ -34,6 +34,7 @@ class Statistics:
     def start_method(self):
         self.unzip()
         self.open()
+        # TODO Идея в том, чтобы метод сортировки был один
         self.sort_requency_descending()
         self.sort_frequency_ascending()
         self.sort_alphabetically_ascending()
@@ -73,7 +74,7 @@ class Statistics:
                             self.stat[char] = 1
 
 
-class Sorted(Statistics):
+class Sorted(Statistics):  # TODO И в каждом дочернем классе метод сортировки должен быть переопределен по-своему
 
     def __init__(self):
         super().__init__()
@@ -96,9 +97,10 @@ class Sorted(Statistics):
             self.sort_data.append(sort_data)
 
 
-class Print_data(Sorted):
+class Print_data(Sorted):  # TODO имя не соответствует правилам CamelCase
 
-    def print_data(self):
+    def print_data(self):  # TODO Сам метод с принтами можно оставить в родительском классе
+        # TODO я имел ввиду в прошлый раз, что он должен заниматься только распечатыванием данных, без сортировки
         print('+' + '-' * 10 + '+' + '-' * 10 + '+')
         print('|{name:^10}|'.format(name='буква'), '{key:^9}|'.format(key='частота'))
         print('+' + '-' * 10 + '+' + '-' * 10 + '+')
@@ -113,8 +115,6 @@ statis = Statistics(file_name='voyna-i-mir.txt.zip')
 statis1 = Sorted()
 statis2 = Print_data()
 statis2.start_method()
-
-
 
 # class Statistics:
 #

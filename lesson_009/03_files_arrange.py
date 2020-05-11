@@ -42,8 +42,10 @@ class Extract:
         self.folder_path = folder_path
 
     def extract(self):
-        self.time_file1 = []
-        self.time_name1 =[]
+        self.time_file1 = []  # TODO Проблема с атрибутами
+        # TODO Если они используются в нескольких методах - то нужно сперва их задать в init, а потом использовать
+        # TODO Если атрибут используется только в одном методе - можно сделать его обычной переменной
+        self.time_name1 = []
         for dirpath, dirnames, filenames in os.walk(folder_path):
             for file in filenames:
                 self.time_file = os.path.join(dirpath, file)
@@ -67,8 +69,15 @@ class Extract:
         for self.time_file in self.time_file1:
             self.old_image_path = os.path.join(self.time_file)
             # print(self.time_file)
-            for self.new_path in self.new_path1: #TODO теперь все файлы в каждую папку переносятся не могу понять как сделать привавильно
-                #TODO или я не в том направлении иду
+            for self.new_path in self.new_path1:
+                # теперь все файлы в каждую папку переносятся не могу понять как сделать привавильно
+                # или я не в том направлении иду
+                # TODO Мне кажется тут разделение по методам запутало вас
+                # TODO Попробуйте в одном цикле идти по файлам
+                # TODO брать полный путь до текущего файла, составлять новый путь из новой директории + год + месяц
+                # TODO и сразу же переносить.
+                # TODO Так то шаги алгоритма верные, но мне кажется создаётся путанница из-за
+                # TODO лишнего сбора и хранения данных
                 self.new_image_path = os.path.join(os.path.normpath(self.new_path))
                 # print(self.new_path)
                 shutil.copy2(self.old_image_path, self.new_image_path)
@@ -80,7 +89,6 @@ time_name = Extract(folder_path)
 time_name.extract()
 time_name.create()
 time_name.replication()
-
 
 # for dirpath, dirnames, filenames in os.walk(folder_path):
 #     # print('{dirpath:-^40}'.format(dirpath=dirpath))
