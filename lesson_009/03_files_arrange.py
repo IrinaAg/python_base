@@ -36,76 +36,85 @@ import os, time, shutil
 # Требования к коду: он должен быть готовым к расширению функциональности. Делать сразу на классах.
 
 
-class Extract:
+# class Extract:
+#
+#     def __init__(self, folder_path):
+#         self.folder_path = folder_path
+#         self.time_file1 = []
+#         self.time_name1 = []
+#         self.new_path = []
+#
+#     def extract(self):
+#         # self.time_file1 = []  # Проблема с атрибутами
+#         # Если они используются в нескольких методах - то нужно сперва их задать в init, а потом использовать
+#         # Если атрибут используется только в одном методе - можно сделать его обычной переменной
+#         # self.time_name1 = []
+#         for dirpath, dirnames, filenames in os.walk(folder_path):
+#             for file in filenames:
+#                 time_file = os.path.join(dirpath, file)
+#                 self.time_file1.append(time_file)
+#                 name = os.path.getmtime(time_file)
+#                 time_name = time.gmtime(name)
+#                 self.time_name1.append(time_name)
+#
+#     def create(self):
+#         for time_name in self.time_name1:
+#             self.folder_name = '{tm_year}/{tm_mon}'.format(tm_year=time_name.tm_year,
+#                                                            tm_mon=time_name.tm_mon)
+#             if len(self.folder_name) <= 6:
+#                 self.folder_name = self.folder_name.replace('/', '/0')
+#             new_path = os.path.join(path, self.folder_name)
+#             self.new_path.append(new_path)
+#             os.makedirs(new_path, exist_ok=True)
+#
+#     def replication(self):
+#         for time_file in self.time_file1:
+#             old_image_path = os.path.join(time_file)
+#             for new_path in self.new_path:
+#                 # Мне кажется тут разделение по методам запутало вас
+#                 # Попробуйте в одном цикле идти по файлам
+#                 # брать полный путь до текущего файла, составлять новый путь из новой директории + год + месяц
+#                 # и сразу же переносить.
+#                 # Так то шаги алгоритма верные, но мне кажется создаётся путанница из-за
+#                 # лишнего сбора и хранения данных
+#                 new_image_path = os.path.join(os.path.normpath(new_path))
+#                 shutil.copy2(old_image_path, new_image_path)
+
+
+# folder_path = 'icons'
+# path = 'icons_by_year'
+# time_name = Extract(folder_path)
+# time_name.extract()
+# time_name.create()
+# time_name.replication()
+
+
+class Extract:  # если один метод все работает
 
     def __init__(self, folder_path):
         self.folder_path = folder_path
 
     def extract(self):
-        self.time_file1 = []  # TODO Проблема с атрибутами
-        # TODO Если они используются в нескольких методах - то нужно сперва их задать в init, а потом использовать
-        # TODO Если атрибут используется только в одном методе - можно сделать его обычной переменной
-        self.time_name1 = []
         for dirpath, dirnames, filenames in os.walk(folder_path):
             for file in filenames:
-                self.time_file = os.path.join(dirpath, file)
-                self.time_file1.append(self.time_file)
-                self.name = os.path.getmtime(self.time_file)
-                self.time_name = time.gmtime(self.name)
-                self.time_name1.append(self.time_name)
-
-    def create(self):
-        self.new_path1 = []
-        for self.time_name in self.time_name1:
-            self.folder_name = '{tm_year}/{tm_mon}'.format(tm_year=self.time_name.tm_year,
-                                                           tm_mon=self.time_name.tm_mon)
-            if len(self.folder_name) <= 6:
-                self.folder_name = self.folder_name.replace('/', '/0')
-            self.new_path = os.path.join(path, self.folder_name)
-            self.new_path1.append(self.new_path)
-            os.makedirs(self.new_path, exist_ok=True)
-
-    def replication(self):
-        for self.time_file in self.time_file1:
-            self.old_image_path = os.path.join(self.time_file)
-            # print(self.time_file)
-            for self.new_path in self.new_path1:
-                # теперь все файлы в каждую папку переносятся не могу понять как сделать привавильно
-                # или я не в том направлении иду
-                # TODO Мне кажется тут разделение по методам запутало вас
-                # TODO Попробуйте в одном цикле идти по файлам
-                # TODO брать полный путь до текущего файла, составлять новый путь из новой директории + год + месяц
-                # TODO и сразу же переносить.
-                # TODO Так то шаги алгоритма верные, но мне кажется создаётся путанница из-за
-                # TODO лишнего сбора и хранения данных
-                self.new_image_path = os.path.join(os.path.normpath(self.new_path))
-                # print(self.new_path)
-                shutil.copy2(self.old_image_path, self.new_image_path)
+                time_file = os.path.join(dirpath, file)
+                name = os.path.getmtime(time_file)
+                created = time.gmtime(name)
+                folder_name = '{tm_year}/{tm_mon}'.format(tm_year=created.tm_year, tm_mon=created.tm_mon)
+                if len(folder_name) <= 6:
+                    folder_name = folder_name.replace('/', '/0')
+                new_path = os.path.join(path, folder_name)
+                os.makedirs(new_path, exist_ok=True)
+                old_image_path = os.path.join(time_file)
+                new_image_path = os.path.join(new_path)
+                shutil.copy2(old_image_path, new_image_path)
 
 
 folder_path = 'icons'
 path = 'icons_by_year'
 time_name = Extract(folder_path)
 time_name.extract()
-time_name.create()
-time_name.replication()
 
-# for dirpath, dirnames, filenames in os.walk(folder_path):
-#     # print('{dirpath:-^40}'.format(dirpath=dirpath))
-#     for file in filenames:
-#         time_file = os.path.join(dirpath, file)
-#         name = os.path.getmtime(time_file)
-#         created = time.gmtime(name)
-#         # print('{file}||{created}'.format(file=file, created=created))
-#         folder_name = '{tm_year}/{tm_mon}'.format(tm_year=created.tm_year, tm_mon=created.tm_mon)
-#         if len(folder_name) <= 6:
-#             folder_name = folder_name.replace('/', '/0')
-#         new_path = os.path.join(path, folder_name)
-#         if not os.path.exists(new_path):
-#             os.makedirs(new_path)
-#         old_image_path = os.path.join(time_file)
-#         new_image_path = os.path.join(new_path)
-#         shutil.copy2(old_image_path, new_image_path)
 
 
 # Усложненное задание (делать по желанию)
