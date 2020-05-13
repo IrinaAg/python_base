@@ -66,23 +66,22 @@ class Year(Minute):
     PART = 5
 
 
-
-read_file = Read(file_name='events.txt')
-read_file1 = Minute(Read)
-# read_file1.start_method()
-
+# read_file = Read(file_name='events.txt')
+read_file1 = Minute(file_name='events.txt')
+read_file1.start_method()
 
 # После выполнения первого этапа нужно сделать группировку событий
 #  - по часам
-read_file2 = Hour(Minute)
-read_file2.start_method()
+read_file2 = Hour(file_name='events.txt')
+# read_file2.start_method()
 
 #  - по месяцу
-read_file3 = Month(Minute)
+read_file3 = Month(file_name='events.txt')
 # read_file3.start_method()
 
 #  - по году
-read_file4 = Year(Minute)
+read_file4 = Year(file_name='events.txt')
 # read_file4.start_method()
 
 # Для этого пригодится шаблон проектирование "Шаблонный метод" см https://goo.gl/Vz4828
+#зачет!

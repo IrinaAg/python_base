@@ -30,6 +30,7 @@ class Statistics:
         self.file_name = file_name
         self.stat = {}
         self.count = 0
+        self.sort_data = []
 
     def start_method(self):
         self.unzip()
@@ -40,11 +41,9 @@ class Statistics:
     def sort(self):
         pass
 
-    def print_data(self):
-        pass
-
     def unzip(self):
         zfile = zipfile.ZipFile(self.file_name, 'r')
+        filename = None
         for filename in zfile.namelist():
             zfile.extract(filename)
         self.file_name = filename
@@ -133,3 +132,4 @@ statis4 = Sorted4()
 # Для этого пригодится шаблон проектирование "Шаблонный метод"
 #   см https://goo.gl/Vz4828
 #   и пример https://gitlab.skillbox.ru/vadim_shandrinov/python_base_snippets/snippets/4
+#зачет!
