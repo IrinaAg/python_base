@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-
+from random import randint, choice
+import logging
 # День сурка
 #
 # Напишите функцию one_day() которая возвращает количество кармы от 1 до 7
@@ -18,7 +19,31 @@
 # базовых встроенных исключений.
 
 ENLIGHTENMENT_CARMA_LEVEL = 777
+list = ['IamGodError', 'DrunkError', 'CarCrashError', 'GluttonyError','DepressionError','SuicideError']
 
-# TODO здесь ваш код
+
+def one_day():
+    logging.basicConfig(filename="log.txt", level=logging.INFO)
+    karma_level = 0
+    while karma_level <= ENLIGHTENMENT_CARMA_LEVEL:
+        dice = randint(1, 13)
+        if dice == 1:
+            exceptions = choice(list)
+            try:
+                if exceptions[0] == int:
+                    return exceptions[0]
+            except:
+                exceptions[0]
+            logging.error(str(exceptions))
+            print(exceptions)
+
+        else:
+            karma = randint(1, 7)
+            karma_level += karma
+            print(karma_level)
+
+
+one_day()
+
 
 # https://goo.gl/JnsDqu
