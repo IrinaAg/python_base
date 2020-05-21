@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
+
+
 # Есть файл с протоколом регистраций пользователей на сайте - registrations.txt
 # Каждая строка содержит: ИМЯ ЕМЕЙЛ ВОЗРАСТ, разделенные пробелами
 # Например:
@@ -31,44 +33,40 @@ class NotEmailError(Exception):
     pass
 
 
+good_file = open('registrations_good.log', 'a', encoding='utf8')
+bad_file = open('registrations_bad.log', 'a', encoding='utf8')
+
+
 def check(line):
-    file = open('registrations_good.log', 'a', encoding='utf8')  # TODO Файл открывать нужно вне цикла
-    # TODO До разделения на 3 переменные нужно сперва проверить len(line.split(' ')) != 3
-    # TODO Если длина не равна 3 - вызывать исключения
+    if len(line.split(' ')) != 3:
+        raise ValueError('НЕ присутсвуют все три поля')
     name, email, age = line.split(' ')
-    name: str = str(name)
+    name = str(name)
     email = str(email)
-    # TODO Перед int(age) надо сперва проверить age.isdigit()
-    # TODO если ответ False - то raise
+    if age.isdigit() == False:
+        raise ValueError('поле возраст НЕ является числом')
     age = int(age)
     if not name.isalpha():
-        raise NotNameError
+        raise NotNameError('Ошибка в имени')
     elif '@' not in email or '.' not in email:
-        raise NotEmailError
+        raise NotEmailError('Поле е-мейл НЕ содержит @ и .')
     elif not 10 <= age <= 99:
-        raise ValueError
+        raise ValueError('поле возраст НЕ является числом от 10 до 99')
     else:
-        print(line, file=file)  # TODO тут не принт, а просто return
-        file.close()
+        return
 
 
 with open('registrations.txt', 'r') as ff:
-    # TODO для этих файлов (логов) используйте один тип открытия, либо open, либо logging
-    # TODO Лучше open, тк логгинг пока не проходили
-    logging.basicConfig(filename="registrations_bad.log", level=logging.ERROR)
     for line in ff:
         line = line[:-1]
         try:
             check(line)
-            # TODO А здесь уже запись производить
+            print(line, file=good_file)
         except ValueError as exc:
-            if 'unpack' in exc.args:  # TODO С теми двумя проверками выше - этот блок if/else не нужен будет
-                # TODO Уточняющее сообщение можно в ошибку добавить ValueError("НЕ присутсвуют все три поля")
-                logging.error(f'НЕ присутсвуют все три поля {exc} в строке {line}')
-            else:
-                logging.error(f'поле возраст НЕ является числом от 10 до 99 {exc} в строке {line}')
+            print(line, exc, file=bad_file)
         except NotNameError:
-            logging.error(f'Ошибка в имени в строке {line}')
+            print(f'Ошибка в имени в строке {line}', file=bad_file)
         except NotEmailError:
-            logging.error(f'Поле е-мейл НЕ содержит @ и .в строке {line}')
-    # TODO После цикла надо будет закрывать файлы
+            print(f'Поле е-мейл НЕ содержит @ и . в строке {line}', file=bad_file)
+    good_file.close()
+    bad_file.close()
