@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from random import randint, choice
 import logging
+
 # День сурка
 #
 # Напишите функцию one_day() которая возвращает количество кармы от 1 до 7
@@ -17,40 +18,64 @@ import logging
 # кармы до уровня ENLIGHTENMENT_CARMA_LEVEL. Исключения обработать и записать в лог.
 # При создании собственных исключений максимально использовать функциональность
 # базовых встроенных исключений.
-
-ENLIGHTENMENT_CARMA_LEVEL = 777
-# TODO Не забывайте стиль поправлять - Code/Reformat Code
-list = ['IamGodError', 'DrunkError', 'CarCrashError', 'GluttonyError','DepressionError','SuicideError']
-# TODO list не стоит использовать, это название занято стандартной функцией list()
-# TODO В списке надо указать исключения, а не строки. А исключения нужно ещё и создать)
-
-def one_day():  # TODO Функция должна только возвращать карму или raise-ить исключение
-    # TODO А уже функцию надо обернуть в цикл
-    # Функцию оберните в бесконечный цикл, выход из которого возможен только при накоплении
-    # кармы до уровня ENLIGHTENMENT_CARMA_LEVEL. Исключения обработать и записать в лог.
-    logging.basicConfig(filename="log.txt", level=logging.INFO)
-    karma_level = 0
-    while karma_level <= ENLIGHTENMENT_CARMA_LEVEL:
-        dice = randint(1, 13)
-        if dice == 1:
-            exceptions = choice(list)
-            # TODO Тут должен будет быть raise exceptions со случайным исключением из списка
-            try:
-                if exceptions[0] == int:
-                    return exceptions[0]
-            except:
-                exceptions[0]
-            logging.error(str(exceptions))
-            print(exceptions)
-
-        else:
-            # TODO А тут return кармы
-            karma = randint(1, 7)
-            karma_level += karma
-            print(karma_level)
+ENLIGHTENMENT_KARMA_LEVEL = 777
 
 
-one_day()
+class IamGodError(Exception):
+    pass
 
+
+class DrunkError(Exception):
+    pass
+
+
+class CarCrashError(Exception):
+    pass
+
+
+class GluttonyError(Exception):
+    pass
+
+
+class DepressionError(Exception):
+    pass
+
+
+class SuicideError(Exception):
+    pass
+
+
+lst = [IamGodError, DrunkError, CarCrashError, GluttonyError, DepressionError, SuicideError]
+
+file = open('log.txt', 'a', encoding='utf8')
+
+
+def one_day():
+    dice = randint(1, 13)
+    if dice == 13:
+        exceptions = choice(lst)
+        raise exceptions
+    else:
+        karma = randint(1, 7)
+        return karma
+
+
+karma_level = 0
+while karma_level < ENLIGHTENMENT_KARMA_LEVEL:
+    try:
+        karma_level += one_day()
+        # print(karma_level, file=file)
+    except IamGodError as exc:
+        print('Я Бог', file=file)
+    except DrunkError:
+        print('Напился', file=file)
+    except CarCrashError:
+        print('Авария', file=file)
+    except GluttonyError:
+        print('Обжорство', file=file)
+    except DepressionError:
+        print('Депрессия', file=file)
+    except SuicideError:
+        print('Суицид', file=file)
 
 # https://goo.gl/JnsDqu
