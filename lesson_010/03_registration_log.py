@@ -43,7 +43,7 @@ def check(line):
     name, email, age = line.split(' ')
     name = str(name)
     email = str(email)
-    if age.isdigit() == False:
+    if age.isdigit() is False:
         raise ValueError('поле возраст НЕ является числом')
     age = int(age)
     if not name.isalpha():
@@ -70,3 +70,4 @@ with open('registrations.txt', 'r') as ff:
             print(f'Поле е-мейл НЕ содержит @ и . в строке {line}', file=bad_file)
     good_file.close()
     bad_file.close()
+#зачет!

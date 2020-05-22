@@ -77,5 +77,6 @@ while karma_level < ENLIGHTENMENT_KARMA_LEVEL:
         print('Депрессия', file=file)
     except SuicideError:
         print('Суицид', file=file)
-
+file.close()
 # https://goo.gl/JnsDqu
+#зачет!
