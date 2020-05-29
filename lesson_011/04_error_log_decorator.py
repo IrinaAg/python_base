@@ -9,8 +9,17 @@
 
 
 def log_errors(func):
-    pass
-    # TODO здесь ваш код
+    def surrogate(*args, **kwargs):
+        try:
+            func(*args, **kwargs)
+        except ValueError as exc:
+            file = open('function_errors.log', 'a', encoding='utf8')
+            print(func.__name__,*args, 'ValueError',exc, file=file)
+        except ZeroDivisionError:
+            file = open('function_errors.log', 'a', encoding='utf8')
+            print(func.__name__, *args, 'ZeroDivisionError','division by zero', file=file)
+            file.close()
+    return surrogate
 
 
 # Проверить работу на следующих функциях
