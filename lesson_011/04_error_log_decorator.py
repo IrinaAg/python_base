@@ -11,14 +11,18 @@
 def log_errors(func):
     def surrogate(*args, **kwargs):
         try:
-            func(*args, **kwargs)
+            func(*args, **kwargs)  # TODO результат работы функкции надо вернуть через return
         except ValueError as exc:
             file = open('function_errors.log', 'a', encoding='utf8')
-            print(func.__name__,*args, 'ValueError',exc, file=file)
+            print(func.__name__, *args, 'ValueError', exc, file=file)
+            # TODO Тут тоже надо закрыть файл (или использовать with)
+            # TODO + надо и тут и ниже добавить raise. Поймали ошибку, записали, выпустили дальше
+            # ошибки из декорируемой функции и выбрасывать их дальше.
         except ZeroDivisionError:
             file = open('function_errors.log', 'a', encoding='utf8')
-            print(func.__name__, *args, 'ZeroDivisionError','division by zero', file=file)
+            print(func.__name__, *args, 'ZeroDivisionError', 'division by zero', file=file)
             file.close()
+
     return surrogate
 
 
@@ -54,11 +58,9 @@ for line in lines:
         print(f'Invalid format: {exc}')
 perky(param=42)
 
-
 # Усложненное задание (делать по желанию).
 # Написать декоратор с параметром - именем файла
 #
 # @log_errors('function_errors.log')
 # def func():
 #     pass
-
