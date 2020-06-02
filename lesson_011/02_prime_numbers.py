@@ -36,25 +36,17 @@ class PrimeNumbers:
         return self
 
     def __next__(self):
-        # TODO В этом месте нужно организовать цикл
-        # TODO Чтобы число проверялось на простоту, а затем, если оно простое - возвращалось
-        # TODO А если не простое - то цикл бы продолжал поиск следующего.
-        # TODO Проверять простое ли число можно алгоритмом из функции выше
-        # TODO Т.е. делить на числа из списка простых чисел
-        # TODO Если на что-то делится без остатка (остаток == 0), то break цикла и ищем новое число
-        # TODO Если на все элементы списка делится с остатком (или в списке нет элементов, например когда двойка
-        # TODO проверяется), то это простое и его надо добавить в список, а затем возвращать.
-        self.i += 1
-        if self.i > 1:
-            if self.i > self.n:
-                raise StopIteration()
-            for number in range(2, self.n + 1):
-                for prime in self.prime_numbers:
-                    if number % prime == 0:
-                        break
-                else:
-                    self.prime_numbers.append(number)
-                    return number
+        for number in range(2, self.n + 1):
+            for prime in self.prime_numbers:
+                if number % prime == 0:
+                    break
+            else:
+                self.prime_numbers.append(number)
+                return number
+            self.i += 1
+        if self.i > self.n:
+            raise StopIteration()
+
 
 
 prime_number_iterator = PrimeNumbers(n=10000)
