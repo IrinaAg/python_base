@@ -18,38 +18,25 @@
 class Read:
 
     def __init__(self):
-        self.lines = []
         self.event_count = 0
+        self.lines = {}
 
     def __iter__(self):
         self.event_count = 0
-        # TODO Вам нужна доп переменная, в которой будет храниться "прошлая минута"
-        # TODO Сперва эта переменная будет равна None
+        self.pre_line = None
         self.file = open('events.txt', 'r', encoding='cp1251')
         return self
 
     def __next__(self):
+        if self.pre_line != None:
+            self.event_count = 1
         for line in self.file:
             if 'NOK' in line:
-                # TODO А вот тут будет проверка, если переменная == None, то записать в неё текущий срез
-                pre_line = line  # TODO Эта строка не нужна
-                if pre_line[1:17] in line[1:17]:  # TODO Иначе всегда будет срабатывать это условие
-                    print(pre_line[1:17])
-                    yield line  # TODO возврат значений нужно делать в else, не в if
+                if self.pre_line == None:
+                    self.pre_line = line[1:17]
                     self.event_count += 1
-                    # TODO Т.е. нашли минуту, которая отличается от переменной с "прошлой минутой"
-                    # TODO И делаем возврат. Причём возвращаем "прошлую минуту" и текущий счётчик
-                    print(self.event_count)  # Не понимаю в какую сторону идти(
                 else:
-                    self.event_count = 1
-
-# TODO После возврата нам надо обновить переменную с прошлой минутой, чтобы в ней была сохранена новая, текущая.
-# TODO И обновить счётчик, сделать его равным 1.
-# TODO НО! Yield мы можем использовать в генераторе, но не в итераторе.
-# TODO Можете реализовать генератор и тогда обновить переменную и счётчик после yield
-# TODO В итераторе нужно будет это выполнить перед циклом, но надо будет условие добавить, проверку, чтобы в
-# TODO переменной не было None (т.е. чтобы в самом начале не сработала эта замена)
-# TODO Либо надо придумать как изменять прошлую минуту на новую до возврата через return
+                    return self.pre_line, self.event_count
 
 
 grouped_events = Read()
