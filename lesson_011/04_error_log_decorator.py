@@ -11,18 +11,18 @@
 def log_errors(func):
     def surrogate(*args, **kwargs):
         try:
-            func(*args, **kwargs)  # TODO результат работы функкции надо вернуть через return
+            result = func(*args, **kwargs)  #результат работы функкции надо вернуть через return
         except ValueError as exc:
-            file = open('function_errors.log', 'a', encoding='utf8')
-            print(func.__name__, *args, 'ValueError', exc, file=file)
-            # TODO Тут тоже надо закрыть файл (или использовать with)
-            # TODO + надо и тут и ниже добавить raise. Поймали ошибку, записали, выпустили дальше
+            with open('function_errors.log', 'a', encoding='utf8') as file:
+                print(func.__name__, *args, 'ValueError', exc, file=file)
+                raise
+            #  + надо и тут и ниже добавить raise. Поймали ошибку, записали, выпустили дальше
             # ошибки из декорируемой функции и выбрасывать их дальше.
         except ZeroDivisionError:
-            file = open('function_errors.log', 'a', encoding='utf8')
-            print(func.__name__, *args, 'ZeroDivisionError', 'division by zero', file=file)
-            file.close()
-
+            with open('function_errors.log', 'a', encoding='utf8') as file:
+                print(func.__name__, *kwargs, 'ZeroDivisionError', 'division by zero', file=file)
+                raise #TODO если добавляю raise и возврат результата функции выбрасывает на консоль ошибку
+        return result
     return surrogate
 
 
@@ -30,6 +30,7 @@ def log_errors(func):
 @log_errors
 def perky(param):
     return param / 0
+
 
 
 @log_errors
