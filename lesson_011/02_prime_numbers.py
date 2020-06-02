@@ -36,6 +36,9 @@ class PrimeNumbers:
         return self
 
     def __next__(self):
+        # TODO цикл от 2 до self.n+1 не подходит
+        # TODO Иначе мы каждый раз будем начинать цикл с самого начала.
+        # TODO попробуйте либо начинать от прошлого найденного простого числа, либо испольуйте while
         for number in range(2, self.n + 1):
             for prime in self.prime_numbers:
                 if number % prime == 0:
@@ -44,11 +47,12 @@ class PrimeNumbers:
                 self.prime_numbers.append(number)
                 return number
             self.i += 1
-        if self.i > self.n:
+        if self.i > self.n:  # TODO Эту проверку я бы выше поставил
             raise StopIteration()
 
 
 
+# TODO Не забывайте про CTRL+ALT+L
 prime_number_iterator = PrimeNumbers(n=10000)
 for number in prime_number_iterator:
     print(number)

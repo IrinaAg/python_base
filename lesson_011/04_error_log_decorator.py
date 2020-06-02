@@ -11,7 +11,7 @@
 def log_errors(func):
     def surrogate(*args, **kwargs):
         try:
-            result = func(*args, **kwargs)  #результат работы функкции надо вернуть через return
+            result = func(*args, **kwargs)  # результат работы функкции надо вернуть через return
         except ValueError as exc:
             with open('function_errors.log', 'a', encoding='utf8') as file:
                 print(func.__name__, *args, 'ValueError', exc, file=file)
@@ -21,8 +21,10 @@ def log_errors(func):
         except ZeroDivisionError:
             with open('function_errors.log', 'a', encoding='utf8') as file:
                 print(func.__name__, *kwargs, 'ZeroDivisionError', 'division by zero', file=file)
-                raise #TODO если добавляю raise и возврат результата функции выбрасывает на консоль ошибку
+                raise  # если добавляю raise и возврат результата функции выбрасывает на консоль ошибку
+            # TODO Ниже добавлю тудушку с ответом
         return result
+
     return surrogate
 
 
@@ -30,7 +32,6 @@ def log_errors(func):
 @log_errors
 def perky(param):
     return param / 0
-
 
 
 @log_errors
@@ -52,6 +53,12 @@ lines = [
     'Земфира 86',
     'Равшан wmsuuzsxi@mail.ru 35',
 ]
+# TODO Т.к. наш декоратор нужен только для логгирования
+# TODO То мы не должны полностью "прятать" ошибки, которые возникают.
+# TODO У нас может быть выстроен код с кучей try/except
+# TODO Но в какой-то момент нам вдруг может понадобится узнать - а какие ошибки ловят эти try/exceptы
+# TODO И тогда как раз пригодится подобный декоратор.
+# TODO Но если он не будет вызывать ошибку дальше - логика программы может просто нарушиться.
 for line in lines:
     try:
         check_line(line)
