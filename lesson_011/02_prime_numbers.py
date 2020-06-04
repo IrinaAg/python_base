@@ -41,7 +41,10 @@ class PrimeNumbers:
         if self.i >= self.n:
             raise StopIteration()
         while self.i <= self.n:
-            for number in range(2, self.n + 1):
+            # TODO Число надо увеличивать тут
+            # TODO И проверку тоже производить тут
+            for number in range(2, self.n + 1):  # TODO Этот цикл не нужен
+                # TODO вместо number у нас self.i
                 for prime in self.prime_numbers:
                     if number % prime == 0:
                         break

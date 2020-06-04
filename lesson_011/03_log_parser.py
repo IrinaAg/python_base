@@ -11,7 +11,7 @@
 #     print(f'[{group_time}] {event_count}')
 #
 # на консоли должно появится что-то вроде
-#`
+# `
 # [2018-05-17 01:57] 1234
 
 
@@ -33,8 +33,8 @@ class Read:
         for line in self.file:
             if 'NOK' in line:
                 self.pre_line = line[1:17]
-                if self.pre_line in self.lines:# TODO распечатывается каждая строчка, не могу вывести только
-                    self.event_count += 1 #TODO последнюю посчитанную
+                if self.pre_line in self.lines:  # распечатывается каждая строчка, не могу вывести только
+                    self.event_count += 1  # последнюю посчитанную
                     # self.lines[self.pre_line] += 1
                 # Но как пайтон поймёт, что в новой строке пришла новая минута, а не старая?
                 # т.е. записалась в pre_line 19:38
@@ -49,10 +49,11 @@ class Read:
                     # self.lines[self.pre_line] = 1
                     self.event_count = 1
                 self.lines.append(self.pre_line)
-                return self.pre_line, self.event_count
+                return self.pre_line, self.event_count  # TODO Тут вывод не подойдет
+                # TODO Надо распечатывать одну строку только один раз
                 # print(self.pre_line, self.event_count)
                 # print(self.lines)
-
+        # TODO Последний же элемент надо отдельно вернуть тут
 
 
 grouped_events = Read()

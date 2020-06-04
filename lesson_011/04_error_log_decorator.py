@@ -22,7 +22,7 @@ def log_errors(func):
             with open('function_errors.log', 'a', encoding='utf8') as file:
                 print(func.__name__, *kwargs, 'ZeroDivisionError', 'division by zero', file=file)
                 raise  # если добавляю raise и возврат результата функции выбрасывает на консоль ошибку
-                        #Ниже добавлю тудушку с ответом
+                # Ниже добавлю тудушку с ответом
         return result
 
     return surrogate
@@ -72,3 +72,4 @@ perky(param=42)
 # @log_errors('function_errors.log')
 # def func():
 #     pass
+#зачет!
