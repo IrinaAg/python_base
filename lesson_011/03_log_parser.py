@@ -19,7 +19,7 @@ class Read:
 
     def __init__(self):
         self.event_count = 0
-        self.lines = {}
+        self.lines = []
 
     def __iter__(self):
         self.event_count = 0
@@ -28,24 +28,31 @@ class Read:
         return self
 
     def __next__(self):
-        if self.pre_line != None:
-            self.event_count = 1
+        # if self.pre_line != None:
+        #     self.event_count = 1
         for line in self.file:
             if 'NOK' in line:
-                if self.pre_line == None:  # TODO Тут вы обрабатываете частный случай для первой строки
-                    self.pre_line = line[1:17]
-                    self.event_count += 1
-                # TODO Но как пайтон поймёт, что в новой строке пришла новая минута, а не старая?
-                # TODO т.е. записалась в pre_line 19:38
-                # TODO в какой-то новой строке приходит 19:39
-                # TODO Надо как-то сравнить переменную, в которой записана прошлая минута
-                # TODO С минутой, которая пришла в новой строке
-                # TODO Если минута новая - изменять переменную, обновлять счётчик
-                # TODO Но при этом после этих изменений надо отправить старую минуту и старый счётчик
-                # TODO Т.е. надо их где-то сохранить, изменить и отправить.
-                # TODO В этом и преимущество генератора было бы, т.к. он бы после yield позволил внести изменения
+                self.pre_line = line[1:17]
+                if self.pre_line in self.lines:# TODO распечатывается каждая строчка, не могу вывести только
+                    self.event_count += 1 #TODO последнюю посчитанную
+                    # self.lines[self.pre_line] += 1
+                # Но как пайтон поймёт, что в новой строке пришла новая минута, а не старая?
+                # т.е. записалась в pre_line 19:38
+                # в какой-то новой строке приходит 19:39
+                # Надо как-то сравнить переменную, в которой записана прошлая минута
+                # С минутой, которая пришла в новой строке
+                # Если минута новая - изменять переменную, обновлять счётчик
+                # Но при этом после этих изменений надо отправить старую минуту и старый счётчик
+                # Т.е. надо их где-то сохранить, изменить и отправить.
+                # В этом и преимущество генератора было бы, т.к. он бы после yield позволил внести изменения
                 else:
-                    return self.pre_line, self.event_count
+                    # self.lines[self.pre_line] = 1
+                    self.event_count = 1
+                self.lines.append(self.pre_line)
+                return self.pre_line, self.event_count
+                # print(self.pre_line, self.event_count)
+                # print(self.lines)
+
 
 
 grouped_events = Read()
