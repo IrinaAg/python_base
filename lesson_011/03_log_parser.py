@@ -38,12 +38,14 @@ class Read:
                 else:
                     self.event_count = 1
                     self.lines.append(self.pre_line)
-                    print(self.pre_line)
+                    print(self.pre_line)  # TODO Нужно возвращать данные через return
+                    # TODO Вот так return self.pre_line, self.event_count
                 # return self.pre_line, self.event_count  # Тут вывод не подойдет
                 # Надо распечатывать одну строку только один раз
                 print(self.event_count)
         # Последний же элемент надо отдельно вернуть тут
-        return self.pre_line
+        return self.pre_line  # TODO Тут тоже нужна будет вторая переменная, а то вылезает ошибка
+    # TODO ValueError: too many values to unpack (expected 2)
 
 
 grouped_events = Read()
