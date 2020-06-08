@@ -28,29 +28,28 @@ def get_prime_numbers(n):
 class PrimeNumbers:
 
     def __init__(self, n):
+        self.prime_numbers = []
         self.n = n
         self.i = 0
 
     def __iter__(self):
-        self.i = 0
-        self.prime_numbers = []
+        self.i = 1
         return self
 
-    def __next__(self):
+    def get_prime_numbers(self):
         self.i += 1
-        if self.i >= self.n:
+        for prime in self.prime_numbers:
+            if self.i % prime == 0:
+                return False
+        return True
+
+    def __next__(self):
+        while self.i < self.n:
+            if self.get_prime_numbers():
+                self.prime_numbers.append(self.i)
+                return self.i
+        else:
             raise StopIteration()
-        while self.i <= self.n:
-            # TODO Число надо увеличивать тут
-            # TODO И проверку тоже производить тут
-            for number in range(2, self.n + 1):  # TODO Этот цикл не нужен
-                # TODO вместо number у нас self.i
-                for prime in self.prime_numbers:
-                    if number % prime == 0:
-                        break
-                else:
-                    self.prime_numbers.append(number)
-                    return number
 
 
 prime_number_iterator = PrimeNumbers(n=10000)
