@@ -4,15 +4,15 @@
 # Есть функция генерации списка простых чисел
 
 
-def get_prime_numbers(n):
-    prime_numbers = []
-    for number in range(2, n + 1):
-        for prime in prime_numbers:
-            if number % prime == 0:
-                break
-        else:
-            prime_numbers.append(number)
-    return prime_numbers
+# def get_prime_numbers(n):
+#     prime_numbers = []
+#     for number in range(2, n + 1):
+#         for prime in prime_numbers:
+#             if number % prime == 0:
+#                 break
+#         else:
+#             prime_numbers.append(number)
+#     return prime_numbers
 
 
 # for number in get_prime_numbers(n=100):
@@ -25,50 +25,61 @@ def get_prime_numbers(n):
 # Распечатать все простые числа до 10000 в столбик
 
 
-class PrimeNumbers:
+# class PrimeNumbers:
+#
+#     def __init__(self, n):
+#         self.prime_numbers = []
+#         self.n = n
+#         self.i = 0
+#
+#     def __iter__(self):
+#         self.i = 1
+#         return self
+#
+#     def get_prime_numbers(self):
+#         self.i += 1
+#         for prime in self.prime_numbers:
+#             if self.i % prime == 0:
+#                 return False
+#         return True
+#
+#     def __next__(self):
+#         while self.i < self.n:
+#             if self.get_prime_numbers():
+#                 self.prime_numbers.append(self.i)
+#                 return self.i
+#         else:
+#             raise StopIteration()
+#
+#
+# prime_number_iterator = PrimeNumbers(n=10000)
+# for number in prime_number_iterator:
+#     print(number)
 
-    def __init__(self, n):
-        self.prime_numbers = []
-        self.n = n
-        self.i = 0
 
-    def __iter__(self):
-        self.i = 1
-        return self
-
-    def get_prime_numbers(self):
-        self.i += 1
-        for prime in self.prime_numbers:
-            if self.i % prime == 0:
-                return False
-        return True
-
-    def __next__(self):
-        while self.i < self.n:
-            if self.get_prime_numbers():
-                self.prime_numbers.append(self.i)
-                return self.i
-        else:
-            raise StopIteration()
-
-
-prime_number_iterator = PrimeNumbers(n=10000)
-for number in prime_number_iterator:
-    print(number)
-
-# TODO можете приступать к следующей части
 # Часть 2
 # Теперь нужно создать генератор, который выдает последовательность простых чисел до n
 # Распечатать все простые числа до 10000 в столбик
 
 
-# def prime_numbers_generator(n):
-#     pass
-#     # TODO здесь ваш код
-#
-#
-# for number in prime_numbers_generator(n=10000):
-#     print(number)
+def get_prime_numbers(i):
+    if i == 1:
+        return False
+    for x in range(2, i):
+        if i % x == 0:
+            return False
+    return True
+
+
+def prime_numbers_generator(i=1, n=10000):
+    while i < n:
+        if get_prime_numbers(i):
+            yield i
+        i += 1
+
+
+for number in prime_numbers_generator(n=10000):
+    print(number)
 
 
 # Часть 3
@@ -79,6 +90,34 @@ for number in prime_number_iterator:
 #           727 -> 7(2)7 -> 7 == 7 -> True
 #           92083 -> 92(0)83 -> 9+2 == 8+3 -> True
 # 2) "палиндромное" - одинаково читающееся в обоих направлениях. Например 723327 и 101
+
+
+def get_prime_numbers(i):
+    if i == 1:
+        return False
+    for x in range(2, i):
+        if i % x == 0:
+            return False
+    return True
+
+
+def palindrom(i):
+    if str(i) == str(i)[::-1]:
+        return True
+    else:
+        return False
+
+
+def prime_numbers_generator(i=1, n=10000):
+    while i < n:
+        if get_prime_numbers(i) and palindrom(i):
+            yield i
+        i += 1
+
+
+for number in prime_numbers_generator(n=10000):
+    print(number)
+
 # 3) придумать свою (https://clck.ru/GB5Fc в помощь)
 #
 # Подумать, как можно применить функции-фильтры к полученной последовательности простых чисел
