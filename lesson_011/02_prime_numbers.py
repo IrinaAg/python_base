@@ -89,6 +89,43 @@ for number in prime_numbers_generator(n=10000):
 #       то для вычисления "счастливости" брать равное количество цифр с начала и конца:
 #           727 -> 7(2)7 -> 7 == 7 -> True
 #           92083 -> 92(0)83 -> 9+2 == 8+3 -> True
+def get_prime_numbers(i):
+    if i == 1:
+        return False
+    for x in range(2, i):
+        if i % x == 0:
+            return False
+    return True
+
+
+def sum_digits(i):
+    middle = len(str(i)) // 2
+    a = str(i)[:1]
+    b = str(i)[1:2]
+    c = str(i)[2:3]
+    d = str(i)[3:4]
+    if middle == 0 or str(i)[:middle] == str(i)[-middle:]:
+        return True
+    for _ in range(i):
+        if int(a) + int(b) == int(c) + int(d):# TODO не могу посчитать правую и левую часть числа
+            print(int(a) + int(b))
+            print(int(c) + int(d))
+        return True
+    else:
+        return False
+
+
+def prime_numbers_generator(i=1, n=10000):
+    while i < n:
+        if get_prime_numbers(i) and sum_digits(i):
+            yield i
+        i += 1
+
+
+for number in prime_numbers_generator(n=10000):
+    print(number)
+
+
 # 2) "палиндромное" - одинаково читающееся в обоих направлениях. Например 723327 и 101
 
 
