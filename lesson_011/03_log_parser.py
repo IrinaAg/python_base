@@ -46,7 +46,6 @@ class Read:
     # ValueError: too many values to unpack (expected 2)
     # TODO в этом случае только последняя строчка выводится
 
-
 grouped_events = Read()
 for group_time, event_count in grouped_events:
     print(f'[{group_time}] {event_count}')
