@@ -44,8 +44,14 @@ class Read:
         # Последний же элемент надо отдельно вернуть тут
         return self.pre_line, self.event_count  # Тут тоже нужна будет вторая переменная, а то вылезает ошибка
     # ValueError: too many values to unpack (expected 2)
-    # TODO в этом случае только последняя строчка выводится
+    # в этом случае только последняя строчка выводится
+    # TODO Нужно в конце придумать в какой момент вызывать stop iteration
+    # TODO Т.е. если к методу обращаются после получения последней строки - надо вызывать stop iteration
+    # TODO Можно в теории связать это с циклом for (например использовать связку for else)
 
+    # TODO Однако это не все проблемы. Сейчас у вас везде возвращается self.event_count
+    # TODO Но при этом перед возвратом - это число приравнивается к 1
+    # TODO Из-за этого всегда возвращается единица
 grouped_events = Read()
 for group_time, event_count in grouped_events:
     print(f'[{group_time}] {event_count}')
