@@ -53,6 +53,8 @@ class PrimeNumbers:
 
 
 prime_number_iterator = PrimeNumbers(n=10000)
+
+
 # for number in prime_number_iterator:
 #     print(number)
 
@@ -69,6 +71,7 @@ def get_prime_numbers(i):
         if i % x == 0:
             return False
     return True
+
 
 #
 # def prime_numbers_generator(i=1, n=10000):
@@ -107,8 +110,8 @@ def sum_digits(i):
     else:
         return False
 
-
-
+# TODO Нэйминг. Голову сломать можно, когда параметры называются так же, как и переменные, которые в них передаются)
+# TODO Но идея верная
 def prime_numbers_generator(i=1, n=10000, sum_digits=sum_digits, get_prime_numbers=get_prime_numbers):
     while i < n:
         if get_prime_numbers(i) and sum_digits(i):
@@ -118,7 +121,6 @@ def prime_numbers_generator(i=1, n=10000, sum_digits=sum_digits, get_prime_numbe
 
 for number in prime_numbers_generator(n=10000):
     print(number)
-
 
 # 2) "палиндромное" - одинаково читающееся в обоих направлениях. Например 723327 и 101
 
