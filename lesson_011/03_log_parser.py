@@ -28,30 +28,22 @@ class Read:
         return self
 
     def __next__(self):
-        # if self.pre_line != None:
-        #     self.event_count = 1
+        if self.pre_line != None:
+            self.event_count = 1
         for line in self.file:
             if 'NOK' in line:
                 self.pre_line = line[1:17]
                 if self.pre_line in self.lines:
                     self.event_count += 1
-                else:
-                    self.event_count = 1
                     self.lines.append(self.pre_line)
-                    # Вот так return self.pre_line, self.event_count
-                    return self.pre_line, self.event_count
-                # Надо распечатывать одну строку только один раз
-        # Последний же элемент надо отдельно вернуть тут
-        return self.pre_line, self.event_count  # Тут тоже нужна будет вторая переменная, а то вылезает ошибка
-    # ValueError: too many values to unpack (expected 2)
-    # в этом случае только последняя строчка выводится
-    # TODO Нужно в конце придумать в какой момент вызывать stop iteration
-    # TODO Т.е. если к методу обращаются после получения последней строки - надо вызывать stop iteration
-    # TODO Можно в теории связать это с циклом for (например использовать связку for else)
+                else:
+                    self.lines.append(self.pre_line)
+                    return self.pre_line, self.event_count # TODO счетчик считает, но выводится в сделующей строчке
+        else:
+            raise StopIteration()
+        # return self.pre_l ine, self.event_count
 
-    # TODO Однако это не все проблемы. Сейчас у вас везде возвращается self.event_count
-    # TODO Но при этом перед возвратом - это число приравнивается к 1
-    # TODO Из-за этого всегда возвращается единица
+
 grouped_events = Read()
 for group_time, event_count in grouped_events:
     print(f'[{group_time}] {event_count}')
