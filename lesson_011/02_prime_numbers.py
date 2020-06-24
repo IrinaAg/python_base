@@ -110,11 +110,10 @@ def sum_digits(i):
     else:
         return False
 
-# TODO Нэйминг. Голову сломать можно, когда параметры называются так же, как и переменные, которые в них передаются)
-# TODO Но идея верная
-def prime_numbers_generator(i=1, n=10000, sum_digits=sum_digits, get_prime_numbers=get_prime_numbers):
+
+def prime_numbers_generator(i=1, n=10000, func_filter1=get_prime_numbers, func_filter2=sum_digits):
     while i < n:
-        if get_prime_numbers(i) and sum_digits(i):
+        if func_filter1(i) and func_filter2(i):
             yield i
         i += 1
 
