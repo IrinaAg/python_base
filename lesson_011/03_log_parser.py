@@ -28,29 +28,32 @@ class Read:
         return self
 
     def __next__(self):
-        if self.pre_line != None:  # TODO с синглтонами лучше использовать is вместо == или !=
-            # TODO Только кажется это условие вообще не нужно в текущем варианте алгоритма
-            self.event_count = 1
+        # if self.pre_line is not None:  # с синглтонами лучше использовать is вместо == или !=
+        #     # Только кажется это условие вообще не нужно в текущем варианте алгоритма
+        #     self.event_count = 1
         for line in self.file:
-            print(line, self.event_count)  # TODO Иначе не учитывается первый NOK
+            # print(line, self.event_count)  # Иначе не учитывается первый NOK
             if 'NOK' in line:
                 self.pre_line = line[1:17]
+                # print(self.pre_line, self.event_count)
                 if self.pre_line in self.lines:
+                    # print(self.pre_line, self.event_count)
                     self.event_count += 1
-                    #self.lines.append(self.pre_line)  # TODO Эта строка как мне кажется не нужна
                 else:
                     self.lines.append(self.pre_line)
-                    # TODO А тут можно возвращать не pre_line с текущей строкой
-                    # TODO А элемент из списка, который предпоследний self.lines[-2]
-                    # TODO Но для этого надо проверить, чтобы длина списка была равна 2+
-                    return self.pre_line, self.event_count
-                    # счетчик считает, но выводится в сделующей строчке
+                    self.event_count = 1
+                    # А тут можно возвращать не pre_line с текущей строкой
+                    # А элемент из списка, который предпоследний self.lines[-2]
+                    # Но для этого надо проверить, чтобы длина списка была равна 2+
+                    #TODO если возвращать self.lines[-2], то считает со сдвигом. Но так все равно выводит каждую строчку
+                if len(self.lines) >= 1:
+                    return self.lines[-1], self.event_count
         else:
             raise StopIteration()
-        # return self.pre_l ine, self.event_count
+        # return self.pre_line, self.event_count
 
 
 grouped_events = Read()
 for group_time, event_count in grouped_events:
     print(f'[{group_time}] {event_count}')
-    break
+    # break
