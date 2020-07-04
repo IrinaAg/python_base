@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 # Описание предметной области:
 #
 # При торгах на бирже совершаются сделки - один купил, второй продал.
@@ -72,5 +71,56 @@
 #
 #     def run(self):
 #         <обработка данных>
+import glob
+import os
+import pandas as pd
 
-# TODO написать код в однопоточном/однопроцессорном стиле
+from python_snippets.utils import time_track
+
+
+class TickerVolatility:
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def run():
+        float = 'trades'
+        trades = {}
+        csvfiles = glob.glob(os.path.join(float, '*.csv'))
+        results = []
+        for csvfile in csvfiles:
+            df = pd.read_csv(csvfile)
+            ticker_name = os.path.basename(csvfile).split('_')[1].split('.')[0]
+            half_sum = (df['PRICE'].max() + df['PRICE'].min()) / 2
+            volatility = ((df['PRICE'].max() - df['PRICE'].min()) / half_sum) * 100
+            trades[ticker_name] = (round(volatility, 2))
+            results = sorted(trades.items(), key=lambda elem: elem[1], reverse=True)
+            # for sort_data in sorted(trades.items(), key=lambda i: i[1],reverse=True):
+            #     results.append(sort_data)
+        print('Максимальная волатильность:')
+        print(results[0][0], results[0][1], results[1][0], results[1][1], results[2][0], results[2][1])
+        print('Минимальная волатильность:')
+        results = sorted(trades.items(), key=lambda elem: elem[1], reverse=False)
+        print(results[14], results[15], results[16], sep='\n')
+        print('Нулевая волатильность:')
+        print(results[:14])
+
+    def _get_(self):
+        try:
+            main()
+        except Exception as exc:
+            print(exc)
+
+
+@time_track
+def main():
+    sizers = [TickerVolatility]
+
+    for sizer in sizers:
+        sizer.run()  # TODO если в классе в функции run стоит self, то выдает ошибку, что пропущен аргумент, но в практике
+        # TODO 06_practice в sizer.run() ничего не указывают, не пойму почему здесь требуется, а в 06_practice нет.
+        # TODO Если убрать self из def run(self) все работает.
+
+
+if __name__ == '__main__':
+    main()
