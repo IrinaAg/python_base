@@ -71,67 +71,72 @@
 #
 #     def run(self):
 #         <обработка данных>
-import glob
-import os
-import pandas as pd
-
+from os import listdir, path
 from python_snippets.utils import time_track
 
 
-class TickerVolatility:
-    # TODO Класс надо заточить под обработку одного файла, а вне класса пройтись по директории
-    # TODO И для каждого файла создать по объекту для расчётов
-    # TODO Потом пройти по всем объектам и собрать результаты вместе.
-    # TODO Эти все сложности помогут легче выполнить два следующих задания)
+store = {}
+trades = {}
+file_path = 'trades'
 
-    # TODO Ещё было бы удобно выделить сортировку и печать в отдельную функцию
-    # TODO И ещё одну функцию-генератор создать, которая на вход будет получать путь к директории
-    # TODO А на выход будет выдавать путь к файлу из директории
+class TickerVolatility:
     # TODO Эти две функции можно будет вынести в отдельный модуль и импортировать в каждое из заданий этого модуля
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, file_name, *args, **kwargs):
+        self.file_name = file_name
+        self.store = {}
 
-    def run():  # TODO тут не хватает self
-        float = 'trades'
-        trades = {}
-        csvfiles = glob.glob(os.path.join(float, '*.csv'))
+
+    def run(self):
+        ticker_name = path.basename(self.file_name).split('_')[1].split('.')[0]
         results = []
-        for csvfile in csvfiles:
-            df = pd.read_csv(csvfile)
-            ticker_name = os.path.basename(csvfile).split('_')[1].split('.')[0]
-            half_sum = (df['PRICE'].max() + df['PRICE'].min()) / 2
-            volatility = ((df['PRICE'].max() - df['PRICE'].min()) / half_sum) * 100
-            trades[ticker_name] = (round(volatility, 2))
-            results = sorted(trades.items(), key=lambda elem: elem[1], reverse=True)
-            # for sort_data in sorted(trades.items(), key=lambda i: i[1],reverse=True):
-            #     results.append(sort_data)
-        print('Максимальная волатильность:')
-        print(results[0][0], results[0][1], results[1][0], results[1][1], results[2][0], results[2][1])
-        print('Минимальная волатильность:')
-        results = sorted(trades.items(), key=lambda elem: elem[1], reverse=False)
-        print(results[14], results[15], results[16], sep='\n')
-        print('Нулевая волатильность:')
-        print(results[:14])
+        with open(self.file_name, 'r') as f:
+            for line in f:
+                if line.startswith('SECID'):
+                    continue
+                else:
+                    results.append(float(line.split(',')[2]))
+        results = sorted(results)
+        half_sum = (results[0] + results[-1]) / 2
+        self.volatility = (results[-1] - results[0]) / half_sum * 100
+        store[ticker_name] = (round(self.volatility, 2))
 
-    def _get_(self):
-        try:
-            main()
-        except Exception as exc:
-            print(exc)
+    # def _get_(self):
+    #     try:
+    #         main()
+    #     except Exception as exc:
+    #         print(exc)
+
+class VolatilityPrint(TickerVolatility):
+    # def __init__(self):
+    #     super().__init__()
+
+
+    def print(self):
+        print('Максимальная волатильность:')
+        view = sorted(store.items(), key=lambda elem: elem[1], reverse=True)
+        for ticker, value in view[:3]:
+            print(f'       {ticker} - {value}%')
+        print('Минимальная волатильность:')
+        view = [(ticker, vol) for ticker, vol in view if vol > 0]
+        for ticker, value in view[-3:]:
+            print(f'       {ticker} - {value}%')
+        print('Нулевая волатильность:')
+        zeroes = [ticker for ticker, vol in store.items() if vol == 0]
+        print(f'       {", ".join(sorted(zeroes))}')
 
 
 @time_track
 def main():
-    sizers = [TickerVolatility]  # TODO Ошибка о которой вы говорите берет своё начало тут
-    # TODO sizer по итогу является классом, а не объектом (не хватает скобок "()")
-    # TODO поэтому self в этом случае не указывает на объект, о чём ошибка и сообщает
+    sizers = [TickerVolatility(path.join(file_path, file_name), trades) for file_name in listdir(file_path)]
+
     for sizer in sizers:
         sizer.run()
-        # если в классе в функции run стоит self, то выдает ошибку, что пропущен аргумент, но в практике
-        # 06_practice в sizer.run() ничего не указывают, не пойму почему здесь требуется, а в 06_practice нет.
-        # Если убрать self из def run(self) все работает.
+
+    proc = VolatilityPrint(TickerVolatility)
+    proc.print()
 
 
 if __name__ == '__main__':
     main()
+
