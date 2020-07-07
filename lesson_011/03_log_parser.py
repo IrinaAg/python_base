@@ -41,15 +41,11 @@ class Read:
                     if len(self.lines) >= 2:
                         return self.lines[-2], self.new_event_count
         else:
-            print(self.lines[-1], self.new_event_count)  # TODO Вот она где прячется
+            print(f'[{self.lines[-1]}]', self.new_event_count)
             raise StopIteration()
 
-# TODO В подобных алгоритмах есть слабое место - последние записи
-# [2018-05-17 11:34:16.873687] OK
-# [2018-05-17 11:34:50.873687] NOK
-# TODO Они не учитываются в основной части алгоритма, т.к. нету следующей записи
-# TODO А значит нет тригера, который бы запустил их отправку
-# TODO Поэтому после цикла и до stopiteration надо вернуть последнюю запись
+# TODO Не понимаю как вернуть последнюю запись.
+
 grouped_events = Read()
 for group_time, event_count in grouped_events:
     print(f'[{group_time}] {event_count}')
