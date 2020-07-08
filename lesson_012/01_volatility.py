@@ -74,18 +74,17 @@
 from os import listdir, path
 from python_snippets.utils import time_track
 
-
 store = {}
 trades = {}
 file_path = 'trades'
 
+
 class TickerVolatility:
-    # TODO Эти две функции можно будет вынести в отдельный модуль и импортировать в каждое из заданий этого модуля
+    # Эти две функции можно будет вынести в отдельный модуль и импортировать в каждое из заданий этого модуля
 
     def __init__(self, file_name, *args, **kwargs):
         self.file_name = file_name
         self.store = {}
-
 
     def run(self):
         ticker_name = path.basename(self.file_name).split('_')[1].split('.')[0]
@@ -107,10 +106,10 @@ class TickerVolatility:
     #     except Exception as exc:
     #         print(exc)
 
+
 class VolatilityPrint(TickerVolatility):
     # def __init__(self):
     #     super().__init__()
-
 
     def print(self):
         print('Максимальная волатильность:')
@@ -140,3 +139,4 @@ def main():
 if __name__ == '__main__':
     main()
 
+# зачёт!
