@@ -23,7 +23,8 @@ from os import listdir, path
 from utils import time_track, VolatilityPrint
 from queue import Empty
 
-
+# TODO Нужно подчистить лишний код
+# TODO Работу с переменными надо наладить через параметры (либо перенести их в локальные области видимости функций)
 store = {}
 trades = {}
 file_path = 'trades'

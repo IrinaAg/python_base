@@ -33,7 +33,6 @@ class TickerVolatility(threading.Thread):
         super().__init__(**kwargs)
         self.file_name = file_name
 
-
     def run(self):
         ticker_name = path.basename(self.file_name).split('_')[1].split('.')[0]
         results = []
@@ -47,6 +46,12 @@ class TickerVolatility(threading.Thread):
         half_sum = (results[0] + results[-1]) / 2
         volatility = (results[-1] - results[0]) / half_sum * 100
         store[ticker_name] = (round(volatility, 2))
+        # TODO 1) С внешними переменными работать не очень здорово, стоит хотя бы параметром сюда передавать словарь
+        # TODO 2) Подобный способ, с обращением к одному словарю из нескольких потоков, может вести к потерям,
+        # TODO если операции записи будут не атомарными.
+        # TODO Как вариант - можно создать атрибут-переменную и туда записывать волатильность.
+        # TODO А после всех расчётов - пройти циклом по объектам и собрать данные из атрибутов.
+        # TODO Либо можно использовать разные типы блокировщиков.
 
 
 @time_track
@@ -67,4 +72,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
