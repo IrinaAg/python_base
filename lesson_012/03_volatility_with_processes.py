@@ -23,12 +23,6 @@ from os import listdir, path
 from utils import time_track, VolatilityPrint
 from queue import Empty
 
-# TODO Нужно подчистить лишний код
-# TODO Работу с переменными надо наладить через параметры (либо перенести их в локальные области видимости функций)
-store = {}
-trades = {}
-file_path = 'trades'
-
 
 class TickerVolatility(multiprocessing.Process):
 
@@ -49,22 +43,16 @@ class TickerVolatility(multiprocessing.Process):
         results = sorted(results)
         half_sum = (results[0] + results[-1]) / 2
         volatility = (results[-1] - results[0]) / half_sum * 100
-        # store[ticker_name] = (round(volatility, 2))
         self.collector.put({ticker_name: round(volatility, 2)})
-        # sizers=[TickerVolatility(file_name=self.file_name, collector=self.collector)]
-        # while True:
-        #     try:
-        #         ticker = self.collector.get(timeout=0.1)
-        #         trades.update(ticker)
-        #     except Empty:
-        #         if not any(sizer.is_alive() for sizer in sizers):
-        #             break
 
 
 @time_track
 def main():
     collector = multiprocessing.Queue()
-    sizers = [TickerVolatility(path.join(file_path, file_name), collector=collector) for file_name in listdir(file_path)]
+    trades = {}
+    file_path = 'trades'
+    sizers = [TickerVolatility(path.join(file_path, file_name), collector=collector) for file_name in
+              listdir(file_path)]
 
     for sizer in sizers:
         sizer.start()
@@ -86,4 +74,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
