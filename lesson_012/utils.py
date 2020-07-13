@@ -14,7 +14,7 @@ def time_track(func):
     return surrogate
 
 
-class VolatilityPrint:
+class VolatilityPrint():
     def __init__(self, store):
         self.store = store
 

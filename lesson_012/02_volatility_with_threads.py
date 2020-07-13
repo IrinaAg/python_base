@@ -20,18 +20,15 @@
 import threading
 from os import listdir, path
 from utils import time_track, VolatilityPrint
-import time
-
-store = {}
-trades = {}
-file_path = 'trades'
+from collections import defaultdict
 
 
 class TickerVolatility(threading.Thread):
 
-    def __init__(self, file_name, *args, **kwargs):
+    def __init__(self, file_name, lock, *args, **kwargs):
         super().__init__(**kwargs)
         self.file_name = file_name
+        self.lock = lock
 
     def run(self):
         ticker_name = path.basename(self.file_name).split('_')[1].split('.')[0]
@@ -45,24 +42,25 @@ class TickerVolatility(threading.Thread):
         results = sorted(results)
         half_sum = (results[0] + results[-1]) / 2
         volatility = (results[-1] - results[0]) / half_sum * 100
+        self.lock.acquire()
         store[ticker_name] = (round(volatility, 2))
-        # TODO 1) С внешними переменными работать не очень здорово, стоит хотя бы параметром сюда передавать словарь
-        # TODO 2) Подобный способ, с обращением к одному словарю из нескольких потоков, может вести к потерям,
-        # TODO если операции записи будут не атомарными.
-        # TODO Как вариант - можно создать атрибут-переменную и туда записывать волатильность.
-        # TODO А после всех расчётов - пройти циклом по объектам и собрать данные из атрибутов.
-        # TODO Либо можно использовать разные типы блокировщиков.
+        self.lock.release()
+
+
+store = defaultdict(int)
 
 
 @time_track
 def main():
-    sizers = [TickerVolatility(path.join(file_path, file_name)) for file_name in listdir(file_path)]
+    lock = threading.Lock()
+    file_path = 'trades'
+    sizers = [TickerVolatility(path.join(file_path, file_name), lock=lock) for file_name in listdir(file_path)]
 
     for sizer in sizers:
         sizer.start()
-        # time.sleep(0.001)
         if sizer.is_alive():
             sizer.need_stop = True
+
     for sizer in sizers:
         sizer.join()
 
