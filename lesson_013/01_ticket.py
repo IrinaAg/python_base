@@ -26,9 +26,16 @@ from PIL import Image, ImageDraw, ImageFont, ImageColor
 class TicketMaker:
 
     def __init__(self, template=None, font_path=None):
+        # TODO Пути старайтесь указывать относительно рабочей директории (той, в которой лежит главный запускаемый файл)
+        # TODO т.к. здесь у нас проект состоит из нескольких "мини"-проектов, то можно выполнить хитрый приём, явно указав
+        # TODO на рабочую директорию.
+        # TODO Сделать это можно либо в Run - Edit configurations
+        # TODO Либо можно просто выделить нужную папку как source root
+        # TODO для этого надо нажать на неё правой кнопкой - mark directory as - source root
         self.template = "/Users/agafonova/python_base/lesson_013/images/ticket_template.png" if template is None else template
         if font_path is None:
             self.font_path = "/Users/agafonova/python_base/lesson_013/python_snippets/fonts/Bressay Display.ttf"
+            # TODO загрузите свой шрифт в репозиторий пожалуйста
         else:
             self.font_path = font_path
 
@@ -55,6 +62,8 @@ class TicketMaker:
 
         im.show()
         save_to = save_to if save_to else 'ticket_image.png'
+        # TODO Сохранение изображений я бы советовал выполнять в отдельную папку
+        # TODO А её наличие стоит проверить и, при необходимости, создать эту папку
         im.save(save_to)
         print(f'Post card saved az {save_to}')
 
@@ -62,3 +71,6 @@ class TicketMaker:
 if __name__ == '__main__':
     maker = TicketMaker()
     maker.make_ticket()
+
+# TODO В основном всё верно, попробуете усложненную часть с argparse?
+# TODO на всякий случай оставлю полезный источник https://habr.com/ru/post/144416/
