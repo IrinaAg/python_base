@@ -98,11 +98,12 @@ def command_line():
     parser.add_argument('from_', type=str, help='откуда летим')
     parser.add_argument('to', type=str, help='куда летим')
     parser.add_argument('date', type=str, help='когда летим')
-    args = parser.parse_args()
     parser.add_argument('-s', '--save_to', help='путь для сохранения заполненнего билета')
+    args = parser.parse_args()
 
     make_ticket(args.fio, args.from_, args.to, args.date)
 
 
 if __name__ == '__main__':
     command_line()
+#зачёт!
