@@ -74,7 +74,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageColor
 def make_ticket(fio, from_, to, date):
     im = Image.open("lesson_013/images/ticket_template.png")
     draw = ImageDraw.Draw(im)
-    font = ImageFont.truetype("/Users/agafonova/python_base/lesson_013/python_snippets/fonts/Bressay Display.ttf",
+    font = ImageFont.truetype("lesson_013/python_snippets/fonts/Bressay Display.ttf",
                               size=16)
     y = im.size[1] - 225 - (10 + font.size) * 2
     draw.text((50, y), fio, font=font, fill=ImageColor.colormap['black'])
