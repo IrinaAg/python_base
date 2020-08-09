@@ -41,10 +41,10 @@ class Read:
                     if len(self.lines) >= 2:
                         return self.lines[-2], self.new_event_count
         else:
-            print(f'[{self.lines[-1]}]', self.new_event_count)
+            # return self.lines[-1], self.new_event_count
+            print(f'[{self.lines[-1]}]', self.new_event_count) # TODO Не понимаю как вернуть последнюю запись.
             raise StopIteration()
 
-# TODO Не понимаю как вернуть последнюю запись.
 
 grouped_events = Read()
 for group_time, event_count in grouped_events:
