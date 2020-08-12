@@ -42,9 +42,12 @@ class Read:
                         return self.lines[-2], self.new_event_count
         else:
             # return self.lines[-1], self.new_event_count
-            print(f'[{self.lines[-1]}]', self.new_event_count) # TODO Не понимаю как вернуть последнюю запись.
+            print(f'[{self.lines[-1]}]', self.new_event_count)  # Не понимаю как вернуть последнюю запись.
             raise StopIteration()
-
+        # TODO Попробуйте использовать ключ-переключатель
+        # TODO Первый раз, когда пайтон дойдет до сюда - он зайдет в if, переключит ключ с True на False
+        # TODO И затем выполнит return
+        # TODO В следующий раз он уже не зайдет в if, а зайдет в else и выполнит raise
 
 grouped_events = Read()
 for group_time, event_count in grouped_events:
