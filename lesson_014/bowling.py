@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 def get_score(result):
+    # TODO Первым делом, если есть такая возможность - от глобальных операторов надо избавляться
+    # TODO Передавайте данные через параметры - это надежнее!
     global analized_res, total
     analized_res = {}
     total = 0
@@ -23,7 +25,7 @@ def game_result(v):
         total += 20
     elif '/' in v:
         total += 15
-    elif '-' in v:
+    elif '-' in v:  # TODO А если будет фрейм -5 например?
         total += 0
     else:
         total += int(v[0]) + int(v[1])
@@ -39,3 +41,7 @@ def check_errors(v):
         raise ValueError('Strike на втором броске')
     if v[0].isdigit() and v[1].isdigit() and int(v[0]) + int(v[1]) >= 10:
         raise ValueError('Введено неправильное значение, сумма одного фрейма больше 9 очков')
+
+
+if __name__ == '__main__':
+    get_score('3532X332/3/62--62X1')  # TODO такой фрейм должен выдавать ошибку
