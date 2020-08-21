@@ -39,7 +39,7 @@ def command_line():
     parser.add_argument('result', type=str, help='Результат')
     args = parser.parse_args()
 
-    get_score(args.result)
+    get_score(args.result, analized_res = {})
 
 
 if __name__ == '__main__':
