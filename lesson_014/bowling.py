@@ -32,7 +32,8 @@ def game_result(v):
         total += 20
     elif '/' in v:
         total += 15
-    elif '-' in v[0]:
+    elif '-' in v[0]:  # TODO Ух как вырос сразу алгоритм, давайте упрощать
+        # TODO Можно цикл завести по фрейму, и проверять, если текущий символ -, то +0, иначе +число
         if '-' in v[1]:
             total += 0
         elif '/' in v[1]:
@@ -42,7 +43,7 @@ def game_result(v):
     elif '-' in v[1]:
         if '-' in v[0]:
             total += 0
-        elif 'X' in v[0]:
+        elif 'X' in v[0]:  # TODO А фрейм X- вроде бы не должен быть вообще, это скорее ошибка
             pass
         else:
             total += int(v[0])
