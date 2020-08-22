@@ -51,3 +51,4 @@ class Read:
 grouped_events = Read()
 for group_time, event_count in grouped_events:
     print(f'[{group_time}] {event_count}')
+#зачёт!
