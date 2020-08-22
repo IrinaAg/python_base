@@ -4,11 +4,6 @@ total = 0
 
 
 def get_score(result, analized_res):
-    # Первым делом, если есть такая возможность - от глобальных операторов надо избавляться
-    # Передавайте данные через параметры - это надежнее!
-    # global total
-    # analized_res = {}
-    # total = 0
     frames = 0
     for _ in result:
         if 'X' in result[-2]:
@@ -32,25 +27,21 @@ def game_result(v):
         total += 20
     elif '/' in v:
         total += 15
-    elif '-' in v[0]:  # TODO Ух как вырос сразу алгоритм, давайте упрощать
-        # TODO Можно цикл завести по фрейму, и проверять, если текущий символ -, то +0, иначе +число
+    elif '-' in v:
         if '-' in v[1]:
             total += 0
-        elif '/' in v[1]:
-            pass
         else:
             total += int(v[1])
-    elif '-' in v[1]:
         if '-' in v[0]:
             total += 0
-        elif 'X' in v[0]:  # TODO А фрейм X- вроде бы не должен быть вообще, это скорее ошибка
-            pass
+        elif 'X' in v[0]:
+            raise Exception('Введено неправильное значение после strike')
         else:
             total += int(v[0])
     else:
         if v[0].isdigit and v[1].isdigit:
             total += int(v[0]) + int(v[1])
-    # return v
+    return v
 
 
 def check_errors(v):
@@ -61,11 +52,14 @@ def check_errors(v):
     elif 'X' in v[1]:
         raise ValueError('Strike на втором броске')
     if v[0].isdigit() and v[1].isdigit() and int(v[0]) + int(v[1]) >= 10:
-        print(v[0].isdigit(), v[1].isdigit(), int(v[0]), int(v[1]))
-        raise ValueError('Введено неправильное значение, сумма одного фрейма больше 9 очков')
+        raise ValueError('Сумма одного фрейма больше 9 очков')
 
 
 if __name__ == '__main__':
-    # get_score('1582X332/3/62--62X', analized_res={})
-    get_score('3532X333/2/62--62X1', analized_res = {})
-    # get_score('-532X332/3/62--62X', analized_res = {})
+    # get_score('1582X332/3/62--62X', analized_res={})#error
+    # get_score('3532X333/2/62--62X1', analized_res = {})#error
+    get_score('-532X332/3/62--62X', analized_res = {})#102
+    # get_score('3532X-33/2/62--62X1', analized_res={})#error
+    # get_score('XXXXXXXXXX', analized_res={})#200
+    # get_score('234--144XX23--4/X', analized_res={})#98
+

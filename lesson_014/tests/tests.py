@@ -19,10 +19,6 @@ class Test(TestCase):
         with self.assertRaisesRegex(ValueError, 'Spare на первом броске'):
             check_errors('/34-/1744XX23--4/')
 
-    def test_frame_more_9_points(self):
-        with self.assertRaisesRegex(ValueError, 'Введено неправильное значение, сумма одного фрейма больше 9 очков'):
-            check_errors('1582X332/3/62--62X')
-
     def test_no_second_throw_after_strike(self):
         with self.assertRaisesRegex(Exception, 'Введено неправильное значение после strike'):
             get_score('3532X333/2/62--62X1', analized_res={})
