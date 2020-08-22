@@ -26,6 +26,7 @@ class Read:
         self.new_event_count = 0
         self.pre_line = None
         self.file = open('events.txt', 'r', encoding='cp1251')
+        self.last_line = True
         return self
 
     def __next__(self):
@@ -40,29 +41,12 @@ class Read:
                     self.event_count = 1
                     if len(self.lines) >= 2:
                         return self.lines[-2], self.new_event_count
-        # if self.lines[-1] != 1:
-        #     self.lines[-1] != self.lines[-1]
-        #     return self.lines[-1], self.new_event_count
+        if self.last_line:
+            self.last_line = False
+            return self.lines[-1], self.new_event_count
         else:
-            # return self.lines[-1], self.new_event_count
-            # print(f'[{self.lines[-1]}]', self.new_event_count)
             raise StopIteration()
 
-        # Попробуйте использовать ключ-переключатель
-        # не нашла информации в интернете
-        # про ключ-переключатель, не пойму как можно переключить с True на False
-        # TODO Это простая переменная которая равна одному значению (например True) но после срабатывания какого-либо
-        # TODO условия значение изменяется (например на False)
-        # TODO И другие проверки с этой переменной уже не проходят
-        # TODO Т.е. надо
-        # TODO 1) Создать атрибут со значением True
-        # TODO 2) Создать проверку перед raise StopIteration, которая будет проверять этот атрибут с True
-        # TODO 3) Если он равен True - то мы выполняем возвращение строки и счётчика и переключаем True на False
-        # TODO (просто заменяем self.x = False)
-        # TODO 4) Если он равен False - вызываем stopiteration
-        # Первый раз, когда пайтон дойдет до сюда - он зайдет в if, переключит ключ с True на False
-        # И затем выполнит return
-        # В следующий раз он уже не зайдет в if, а зайдет в else и выполнит raise
 
 grouped_events = Read()
 for group_time, event_count in grouped_events:
