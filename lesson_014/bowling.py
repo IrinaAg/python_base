@@ -34,8 +34,6 @@ def game_result(v):
             total += int(v[1])
         if '-' in v[0]:
             total += 0
-        elif 'X' in v[0]:
-            raise Exception('Введено неправильное значение после strike')
         else:
             total += int(v[0])
     else:
