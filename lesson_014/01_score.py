@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from bowling import get_score
 import argparse
+
+
 # Вас взяли на работу в молодой стартап. Идея стартапа - предоставлять сервис расчета результатов игр.
 # Начать решили с боулинга, упрощенной версии.
 #
@@ -39,7 +41,7 @@ def command_line():
     parser.add_argument('result', type=str, help='Результат')
     args = parser.parse_args()
 
-    get_score(args.result, analized_res = {})
+    get_score(args.result, analized_res={})
 
 
 if __name__ == '__main__':
@@ -53,3 +55,4 @@ if __name__ == '__main__':
 # При написании кода помнить, что заказчик может захотеть доработок и новых возможностей...
 # И, возможно, вам пригодится паттерн проектирования "Состояние",
 #   см https://clck.ru/Fudd8 и https://refactoring.guru/ru/design-patterns/state
+#зачёт!
