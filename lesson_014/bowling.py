@@ -3,7 +3,8 @@
 total = 0
 
 
-def get_score(result, analized_res):
+def get_score(result):
+    analized_res = {}
     frames = 0
     for _ in result:
         if 'X' in result[-2]:
@@ -54,10 +55,10 @@ def check_errors(v):
 
 
 if __name__ == '__main__':
-    # get_score('1582X332/3/62--62X', analized_res={})#error
-    # get_score('3532X333/2/62--62X1', analized_res = {})#error
-    get_score('-532X332/3/62--62X', analized_res = {})#102
-    # get_score('3532X-33/2/62--62X1', analized_res={})#error
-    # get_score('XXXXXXXXXX', analized_res={})#200
-    # get_score('234--144XX23--4/X', analized_res={})#98
+    # get_score('1582X332/3/62--62X')#error
+    # get_score('3532X333/2/62--62X1')#error
+    get_score('-532X332/3/62--62X')#102
+    # get_score('3532X-33/2/62--62X1')#error
+    # get_score('XXXXXXXXXX')#200
+    # get_score('234--144XX23--4/X')#98
 

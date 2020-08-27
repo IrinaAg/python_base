@@ -1,64 +1,51 @@
 # -*- coding: utf-8 -*-
 from bowling import get_score
 
-my_dict = {}
-result_file = open('tournament_result.txt', 'r', encoding='utf8')
+result_file = open('tournament_result.txt', 'a', encoding='utf8')
 
 
 def treatment():
     # with open(file_name, 'r', encoding='utf8') as file:
-    file = open('tournament.txt')
+    file = open('tournament.txt', 'r', encoding='utf8')
     for line in file:
-        tour = line.split('winner is .........')
-        tour = str(tour)
-        if '### Tour' not in line:
-            # проходит только до первой записи "winner is ........." как пойти дальше по файлу
-            # print(line.strip())
-            # не могу понять(
-            # if 'winner is' not in line:
-            # if not line.strip():
-            #     continue
-            my_dict = line.split('\t')
-            result = my_dict[1]
+        if '### Tour' in line:
+            print('\n', line, file=result_file)
+        elif len(line) > 20:
+            name, res = line.split('\t')
+            name = str(name)
+            res = str(res)
             try:
-                get_score(result=result, analized_res={})
-                # TODO Это скорее всего происходит из-за того, что вы используете в параметре изменяемый объект
-                # TODO Создавайте словарь внутри функции с 0, не надо передавать параметром его
-                # TODO А результат надо просто возвращать из фнукции и уже тут сохранять где-то
-                # очки считаются прибавлением результата всех игроков, надо
-                # обнулить результат, но тоже не понимаю где его обнулить
-            except ValueError as val:
-                print(line, val)
+                score = []
+                score.append(get_score(result=res))#TODO Не понимаю, почему суммируются результаты всех участников
+                #TODO помогите, пожалуйста,разобраться
+                print(name, res, score, file=result_file)
             except Exception as exc:
-                print(line, exc)
-        # else:
-        #     return
+                print(line, exc, file=result_file)
+        elif 'winner is .........' in line:
+            print(line[:-10], file=result_file)
+            # try:
+            #     print(line[:-10], max(score), file=result_file)
+            # except ValueError as val:
+            #     print(line[:-10], name, res, score, file=result_file)
+
+            # Это скорее всего происходит из-за того, что вы используете в параметре изменяемый объект
+            # Создавайте словарь внутри функции с 0, не надо передавать параметром его
+            # А результат надо просто возвращать из фнукции и уже тут сохранять где-то
+    file.close()
 
 
 treatment()
 
-#
-# with open('tournament_result.txt', 'r', encoding='utf8') as ff:
-#     for line in ff:
-#         try:
-#             treatment()
-#             get_score(result=my_dict[1], analized_res={})
-#             # print(my_dict[1], file=result_file)
-#         except ValueError as val:
-#             print(line, val)
-#         except Exception as exc:
-#             print(line, exc)
-#
-#     result_file.close()
-# ### Tour 1  TODO У вас всего 3 типа строк. 1) Начало
-# Антон	1/6/1/--327-18812382  TODO 2) результаты
+
+# ### Tour 1  У вас всего 3 типа строк. 1) Начало
+# Антон	1/6/1/--327-18812382   2) результаты
 # Елена	3532X332/3/62--62X
 # Роман	725518X--8/--543152
 # Татьяна	8/--35-47/371/518-4/
 # Ринат	4-3/7/3/8/X711627-5
-# winner is .........  TODO 3) конец тура
-# TODO Условиями надо все строки обрабатывать по-своему
-# TODO Находите начало - обновляете словарь или список
-# TODO Находите результаты - считаете их и добавляете в словарь/список
-# TODO Находите конец тура - подсчитываете итоги
-# TODO Можно сразу после каждой строки - писать результат в итоговый файл
+# winner is .........   3) конец тура
+#  Условиями надо все строки обрабатывать по-своему
+# Находите начало - обновляете словарь или список
+# Находите результаты - считаете их и добавляете в словарь/список
+# Находите конец тура - подсчитываете итоги
+# Можно сразу после каждой строки - писать результат в итоговый файл
