@@ -16,8 +16,9 @@ def treatment():
             res = str(res)
             try:
                 score = []
-                score.append(get_score(result=res))#TODO Не понимаю, почему суммируются результаты всех участников
-                #TODO помогите, пожалуйста,разобраться
+                score.append(get_score(result=res))
+                # Не понимаю, почему суммируются результаты всех участников
+                # помогите, пожалуйста,разобраться
                 print(name, res, score, file=result_file)
             except Exception as exc:
                 print(line, exc, file=result_file)
@@ -35,7 +36,6 @@ def treatment():
 
 
 treatment()
-
 
 # ### Tour 1  У вас всего 3 типа строк. 1) Начало
 # Антон	1/6/1/--327-18812382   2) результаты
