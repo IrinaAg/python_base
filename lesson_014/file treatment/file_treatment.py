@@ -17,8 +17,6 @@ def treatment():
             try:
                 score = []
                 score.append(get_score(result=res))
-                # Не понимаю, почему суммируются результаты всех участников
-                # помогите, пожалуйста,разобраться
                 print(name, res, score, file=result_file)
             except Exception as exc:
                 print(line, exc, file=result_file)

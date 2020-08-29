@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
-total = 0
-# TODO Проблема с глобальной переменной
-# TODO Она нигде не обновляется, вот все значения и копятся
-# TODO Я бы советовал вообще уйти от использования глобальной переменной
-# TODO Функция должна получать строку и независимо возвращать результат только по этой строке
+# Проблема с глобальной переменной
+# Она нигде не обновляется, вот все значения и копятся
+# Я бы советовал вообще уйти от использования глобальной переменной
+# Функция должна получать строку и независимо возвращать результат только по этой строке
+
 
 def get_score(result):
     analized_res = {}
@@ -18,32 +18,42 @@ def get_score(result):
     for k, v in analized_res.items():
         frames += 1
         check_errors(v)
-        game_result(v)
-    print(result, '–', total)
+        counter = Counter()
+        print(counter.func(v))
+    print(result, '–')
     if frames != 10:
         raise Exception('Не правильное количество фреймов!')
-    return total
 
 
-def game_result(v):
-    global total
-    if 'X' in v[0]:
-        total += 20
-    elif '/' in v:
-        total += 15
-    elif '-' in v:
-        if '-' in v[1]:
-            total += 0
+class Counter:
+
+    def __init__(self):
+        self.total = 0
+
+    # def game_result(): #TODO Попробовала уйти от глобальной переменной через замыкания, но не суммируется весь total
+    #     total = 0 #TODO не могу понять почему, через класс так же не суммируется
+
+    def func(self, v):
+        # nonlocal total
+        if 'X' in v[0]:
+            self.total += 20
+        elif '/' in v:
+            self.total += 15
+        elif '-' in v:
+            if '-' in v[1]:
+                self.total += 0
+            else:
+                self.total += int(v[1])
+            if '-' in v[0]:
+                self.total += 0
+            else:
+                self.total += int(v[0])
         else:
-            total += int(v[1])
-        if '-' in v[0]:
-            total += 0
-        else:
-            total += int(v[0])
-    else:
-        if v[0].isdigit and v[1].isdigit:
-            total += int(v[0]) + int(v[1])
-    return v
+            if v[0].isdigit and v[1].isdigit:
+                self.total += int(v[0]) + int(v[1])
+        # print(total)
+        return self.total
+    # return func
 
 
 def check_errors(v):
