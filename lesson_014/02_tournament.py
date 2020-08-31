@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import argparse
+from file_treatment import treatment
 
 # Прибежал менеджер и сказал что нужно срочно просчитать протокол турнира по боулингу в файле tournament.txt
 #
@@ -26,7 +28,19 @@
 # Из текущего файла сделать консольный скрипт для формирования файла с результатами турнира.
 # Параметры скрипта: --input <файл протокола турнира> и --output <файл результатов турнира>
 
-# TODO тут ваш код
+
+def ToCommandLine():
+    parser = argparse.ArgumentParser(description="Формирования файла с результатами турнира")
+    parser.add_argument('input_file', type=str, required= True)
+    parser.add_argument('output_file', type=str, required= True)
+    args = parser.parse_args()
+
+    treatment(args.in_file, args.out_file)
+
+
+if __name__ == '__main__':
+    ToCommandLine()
+
 
 # Усложненное задание (делать по желанию)
 #

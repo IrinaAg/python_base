@@ -21,14 +21,14 @@ class Test(TestCase):
 
     def test_no_second_throw_after_strike(self):
         with self.assertRaisesRegex(Exception, 'Введено неправильное значение после strike'):
-            get_score('3532X333/2/62--62X1', analized_res={})
+            get_score('3532X333/2/62--62X1')
 
     def test_incorrect_frames(self):
         with self.assertRaisesRegex(Exception, 'Не правильное количество фреймов!'):
-            get_score('1744XX23--4/', analized_res={})
+            get_score('1744XX23--4/')
 
     def test_all_strikes(self):
-        self.score = get_score(result='XXXXXXXXXX', analized_res={})
+        self.score = get_score(result='XXXXXXXXXX')
         self.assertEqual(200, self.score)
 
 

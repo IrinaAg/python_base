@@ -1,12 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Проблема с глобальной переменной
-# Она нигде не обновляется, вот все значения и копятся
-# Я бы советовал вообще уйти от использования глобальной переменной
-# Функция должна получать строку и независимо возвращать результат только по этой строке
-
 
 def get_score(result):
+    total = 0
     analized_res = {}
     frames = 0
     for _ in result:
@@ -18,44 +14,48 @@ def get_score(result):
     for k, v in analized_res.items():
         frames += 1
         check_errors(v)
-        counter = Counter()
-        print(counter.func(v))
-    print(result, '–')
-    if frames != 10:
-        raise Exception('Не правильное количество фреймов!')
-
-
-class Counter:
-
-    def __init__(self):
-        self.total = 0
-
-    # def game_result(): # Попробовала уйти от глобальной переменной через замыкания, но не суммируется весь total
-    #     total = 0 # не могу понять почему, через класс так же не суммируется
-
-    def func(self, v):
-        # TODO Вместо суммирования, вы можете возвращать этой функцией количество очков за 'v'
-        # TODO А там, в функции выше, просто суммировать эти очки
-        # nonlocal total
         if 'X' in v[0]:
-            self.total += 20
+            total += 20
         elif '/' in v:
-            self.total += 15
+            total += 15
         elif '-' in v:
             if '-' in v[1]:
-                self.total += 0
+                total += 0
             else:
-                self.total += int(v[1])
+                total += int(v[1])
             if '-' in v[0]:
-                self.total += 0
+                total += 0
             else:
-                self.total += int(v[0])
+                total += int(v[0])
         else:
             if v[0].isdigit and v[1].isdigit:
-                self.total += int(v[0]) + int(v[1])
-        # print(total)
-        return self.total
-    # return func
+                total += (int(v[0]) + int(v[1]))
+    lst_result = []
+    lst_result.append(result)
+    lst_result.append(total)
+    print(lst_result[0], '–', lst_result[1])
+    if frames != 10:
+        raise Exception('Не правильное количество фреймов!')
+    return total
+
+
+def game_result(v):
+    if 'X' in v[0]:
+        return + 20
+    elif '/' in v:
+        return + 15
+    elif '-' in v:
+        if '-' in v[1]:
+            return 0
+        else:
+            int(v[1])
+        if '-' in v[0]:
+            return 0
+        else:
+            int(v[0])
+    else:
+        if v[0].isdigit and v[1].isdigit:
+            return int(v[0]) + int(v[1])
 
 
 def check_errors(v):
@@ -72,7 +72,7 @@ def check_errors(v):
 if __name__ == '__main__':
     # get_score('1582X332/3/62--62X')#error
     # get_score('3532X333/2/62--62X1')#error
-    get_score('-532X332/3/62--62X')  # 102
+    get_score(result='-532X332/3/62--62X')  # 102
     # get_score('3532X-33/2/62--62X1')#error
     # get_score('XXXXXXXXXX')#200
     # get_score('234--144XX23--4/X')#98
