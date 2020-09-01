@@ -29,5 +29,5 @@ def treatment(input_file, output_file):
     input_file.close()
 
 
-treatment(input_file='tournament.txt',output_file='tournament_result.txt')
-
+if __name__ == '__main__':
+    treatment(input_file='tournament.txt', output_file='tournament_result.txt')
