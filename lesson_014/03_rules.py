@@ -24,3 +24,164 @@
 # Необходимые изменения сделать во всех модулях. Тесты - дополнить.
 
 # "И да, старые правила должны остаться! для внутреннего рынка..." - уточнил менеджер напоследок.
+
+
+def get_score(result):
+    total = 0
+    analized_res = {}
+    frames = 0
+    for _ in result:
+        if 'X' in result[-2]:
+            if result[-1].isdigit():
+                raise Exception('Введено неправильное значение после strike')
+        for i, k in enumerate(zip(result.replace('X', 'X-')[0::2], result.replace('X', 'X-')[1::2]), start=1):
+            #TODO Не могу понять почему в этом примере 'X4/XXXXXXXX' Х нормально просчитывается как Х- для парного счета
+            #TODO а здесь 'Х4/34XXXXXXX') как Х4.
+
+            # print(i, k)
+            analized_res[i] = k
+            # print(i)
+    for k, v in analized_res.items():
+        print(k, v)
+        frames += 1
+        check_errors(v)
+        if 'X' in v:
+            if 'X' in analized_res[k + 1]:#k
+                # print(analized_res[k + 1])
+                if 'X' in analized_res[k + 2]:#k
+                    # print(analized_res[k + 1])
+                    total += 30
+                    # print(total, 'x')
+                elif '-' in analized_res[k + 2][0]:#k
+                    total += 20
+                    # print(total, 'x1')
+                else:
+                    total += 20 + int(analized_res[k + 2][0])#k
+                    # print(total, 'x2')
+            elif '/' in analized_res[k + 1]:#k
+                total += 20
+                # print(total)
+            elif '-' in analized_res[k + 1][0]:#k
+                if '-' in analized_res[k + 1][1]:
+                    total += 10
+                    # print(total)
+                else:
+                    total += 10 + int(analized_res[k + 1][1])
+                    # print(total)
+            elif '-' in analized_res[k + 1][1]:#k
+                total += 10 + int(analized_res[k + 1][0])
+                # print(total, '-')
+            else:
+                total += 10 + int(analized_res[k + 1][0]) + int(analized_res[k + 1][1])#k 2 раза
+                # print(total, '-')
+        elif '/' in v:
+            if 'X' in analized_res[k + 1]:
+                total += 20
+                # print(total)
+            elif '/' in analized_res[k + 1][0]:
+                raise ValueError('Spare на первом броске')
+            elif '-' in analized_res[k + 1][0]:
+                total += 10
+                # print(total, '-')
+            else:
+                total += 10 + int(analized_res[k + 1][0])
+                # print(total)
+        elif '-' in v[0]:
+            if '-' in v[1]:
+                total += 0
+            elif '/' in v[1]:
+                pass
+            else:
+                total += int(v[1])
+                # print(total, '-')
+        elif '-' in v[1]:
+            if '-' in v[0]:
+                total += 0
+            elif 'X' in v[0]:
+                pass
+            else:
+                total += int(v[0])
+                # print(total, '-')
+        else:
+            if v[0].isdigit and v[1].isdigit:
+                total += int(v[0]) + int(v[1])
+                # print(total, '-')
+    lst_result = []
+    lst_result.append(result)
+    lst_result.append(total)
+    print(lst_result[0], '–', lst_result[1])
+    if frames != 10:
+        raise Exception('Не правильное количество фреймов!')
+    return total
+
+
+def woldwide(k, v, analized_res):
+    if 'X' in v:
+        if 'X' in analized_res[k + 1]:
+            if 'X' in analized_res[k + 2]:
+                print(analized_res[k])
+                return + 30
+            elif '-' in analized_res[k + 2][0]:
+                return + 20
+            else:
+                return + 20 + int(analized_res[k + 2][0])
+        elif '/' in analized_res[k + 1]:
+            return + 20
+        elif '-' in analized_res[k + 1][0]:
+            if '-' in analized_res[k + 1][1]:
+                return + 10
+            else:
+                return + 10 + int(analized_res[k + 1][1])
+        elif '-' in analized_res[k + 1][1]:
+            return + 10 + int(analized_res[k + 1][0])
+        else:
+            return + 10 + int(analized_res[k + 1][0]) + int(analized_res[k + 1][1])
+    elif '/' in v:
+        if 'X' in analized_res[k + 1]:
+            return + 20
+        elif '/' in analized_res[k + 1][0]:
+            raise ValueError('Spare на первом броске')
+        elif '-' in analized_res[k + 1][0]:
+            return + 10
+        else:
+            return + 10 + int(analized_res[k + 1][0])
+    elif '-' in v[0]:
+        if '-' in v[1]:
+            return + 0
+        elif '/' in v[1]:
+            pass
+        else:
+            return + int(v[1])
+    elif '-' in v[1]:
+        if '-' in v[0]:
+            return + 0
+        elif 'X' in v[0]:
+            pass
+        else:
+            return + int(v[0])
+    else:
+        if v[0].isdigit and v[1].isdigit:
+            return + int(v[0]) + int(v[1])
+
+
+def check_errors(v):
+    if '0' in v:
+        raise ValueError('Введено неправильное значение - 0')
+    elif '/' in v[0]:
+        raise ValueError('Spare на первом броске')
+    # elif 'X' in v[1]:
+    #     raise ValueError('Strike на втором броске')
+    if v[0].isdigit() and v[1].isdigit() and int(v[0]) + int(v[1]) >= 31:
+        raise ValueError('Сумма одного фрейма больше 31 очков')
+
+
+if __name__ == '__main__':
+    # get_score('1582X332/3/62--62X')#error
+    # get_score('3532X333/2/62--62X1')#error
+    # get_score(result='-532X332/3/62--62X')  # 102
+    # get_score('3532X-33/2/62--62X1')#error
+    # get_score('XXXXXXXXXX')#200
+    # get_score('234--144XX23--4/X')#98
+    # get_score('ХXX347/21--------')
+    get_score('Х4/34XXXXXXX')
+    # get_score('X4/XXXXXXXX')
