@@ -35,8 +35,9 @@ def get_score(result):
             if result[-1].isdigit():
                 raise Exception('Введено неправильное значение после strike')
         for i, k in enumerate(zip(result.replace('X', 'X-')[0::2], result.replace('X', 'X-')[1::2]), start=1):
-            #TODO Не могу понять почему в этом примере 'X4/XXXXXXXX' Х нормально просчитывается как Х- для парного счета
-            #TODO а здесь 'Х4/34XXXXXXX') как Х4.
+            # TODO Не могу понять почему в этом примере 'X4/XXXXXXXX'
+            # Х нормально просчитывается как Х- для парного счета
+            # TODO а здесь 'Х4/34XXXXXXX') как Х4.
 
             # print(i, k)
             analized_res[i] = k
@@ -46,33 +47,33 @@ def get_score(result):
         frames += 1
         check_errors(v)
         if 'X' in v:
-            if 'X' in analized_res[k + 1]:#k
+            if 'X' in analized_res[k + 1]:  # k
                 # print(analized_res[k + 1])
-                if 'X' in analized_res[k + 2]:#k
+                if 'X' in analized_res[k + 2]:  # k
                     # print(analized_res[k + 1])
                     total += 30
                     # print(total, 'x')
-                elif '-' in analized_res[k + 2][0]:#k
+                elif '-' in analized_res[k + 2][0]:  # k
                     total += 20
                     # print(total, 'x1')
                 else:
-                    total += 20 + int(analized_res[k + 2][0])#k
+                    total += 20 + int(analized_res[k + 2][0])  # k
                     # print(total, 'x2')
-            elif '/' in analized_res[k + 1]:#k
+            elif '/' in analized_res[k + 1]:  # k
                 total += 20
                 # print(total)
-            elif '-' in analized_res[k + 1][0]:#k
+            elif '-' in analized_res[k + 1][0]:  # k
                 if '-' in analized_res[k + 1][1]:
                     total += 10
                     # print(total)
                 else:
                     total += 10 + int(analized_res[k + 1][1])
                     # print(total)
-            elif '-' in analized_res[k + 1][1]:#k
+            elif '-' in analized_res[k + 1][1]:  # k
                 total += 10 + int(analized_res[k + 1][0])
                 # print(total, '-')
             else:
-                total += 10 + int(analized_res[k + 1][0]) + int(analized_res[k + 1][1])#k 2 раза
+                total += 10 + int(analized_res[k + 1][0]) + int(analized_res[k + 1][1])  # k 2 раза
                 # print(total, '-')
         elif '/' in v:
             if 'X' in analized_res[k + 1]:
@@ -116,6 +117,10 @@ def get_score(result):
 
 
 def woldwide(k, v, analized_res):
+    # TODO Перебор в лоб - не самое эффективное решение
+    # TODO Я бы посоветовал подумать в сторону функции, которая возвращает очки за следующие два броска
+    # TODO Т.е. например вызов func(result='Х4/34XXXXXXX', frame_number=1) -вернёт-> 10 (4+6)
+    # TODO И отдельную функцию можно для одного броска (либо параметром указывать за сколько бросков нужны доп очки
     if 'X' in v:
         if 'X' in analized_res[k + 1]:
             if 'X' in analized_res[k + 2]:
@@ -183,5 +188,9 @@ if __name__ == '__main__':
     # get_score('XXXXXXXXXX')#200
     # get_score('234--144XX23--4/X')#98
     # get_score('ХXX347/21--------')
+    print('Х4/34XXXXXXX'.replace('X', 'X-'))  # TODO Причина в том, что первый X был на одном языке
+    # TODO а остальные на другом
+    # TODO Можно сделать два replace, одним заменить русские символы на англ, вторым уже заменять на X-
+    print('X4/34XXXXXXX'.replace('X', 'X-'))
     get_score('Х4/34XXXXXXX')
     # get_score('X4/XXXXXXXX')
