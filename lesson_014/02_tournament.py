@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import argparse
-from file_treatment import treatment
+from file_treatment import treatment, treatment_woldwide
 
 # Прибежал менеджер и сказал что нужно срочно просчитать протокол турнира по боулингу в файле tournament.txt
 #
@@ -31,11 +31,17 @@ from file_treatment import treatment
 
 def ToCommandLine():
     parser = argparse.ArgumentParser(description="Формирования файла с результатами турнира")
-    parser.add_argument('input_file', type=str, required= True)
-    parser.add_argument('output_file', type=str, required= True)
+    parser.add_argument('input_file', type=str)
+    parser.add_argument('output_file', type=str)
     args = parser.parse_args()
 
-    treatment(args.in_file, args.out_file)
+    question = input("По каким правилам подсчитывать очки: упрощенным-выбрать 1 или международным "
+                     "выбрать-другое значение?")
+
+    if question == '1':
+        treatment(args.input_file, args.output_file)
+    else:
+        treatment_woldwide(args.input_file, args.output_file)
 
 
 if __name__ == '__main__':
