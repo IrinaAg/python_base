@@ -11,6 +11,7 @@ def get_score(result):
                 raise Exception('Введено неправильное значение после strike')
         for i, k in enumerate(zip(result.replace('X', 'X-')[0::2], result.replace('X', 'X-')[1::2]), start=1):
             analized_res[i] = k
+            print(analized_res)
     for k, v in analized_res.items():
         frames += 1
         check_errors(v)
@@ -72,7 +73,9 @@ def check_errors(v):
 if __name__ == '__main__':
     # get_score('1582X332/3/62--62X')#error
     # get_score('3532X333/2/62--62X1')#error
-    get_score(result='-532X332/3/62--62X')  # 102
+    # get_score(result='-532X332/3/62--62X')  # 102
     # get_score('3532X-33/2/62--62X1')#error
     # get_score('XXXXXXXXXX')#200
     # get_score('234--144XX23--4/X')#98
+    # get_score(result='XXX')
+    get_score('X3/XXXXXXXX')#195

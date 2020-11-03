@@ -47,7 +47,7 @@ def command_line():
 if __name__ == '__main__':
     command_line()
 
-# result = '34X41-/2544XX23--'
+result = '34X41-/2544XX23--'
 # result = 'X4/34-4------------'
 # result = 'X34-/1744XX23--4/'
 
