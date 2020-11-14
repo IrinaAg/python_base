@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from bowling import get_score
-from 03_rules import get_score_woldwide
+from woldwide import get_score_woldwide
 
 
 def treatment(input_file, output_file):
