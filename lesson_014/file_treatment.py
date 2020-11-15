@@ -36,8 +36,9 @@ if __name__ == '__main__':
 
 
 def treatment_woldwide(input_file, output_file):
-    input_file = open('/Users/agafonova/python_base/lesson_014/tournament.txt', 'r', encoding='utf8')
-    output_file = open('/Users/agafonova/python_base/lesson_014/tournament_result.txt', 'a', encoding='utf8')
+    # TODO пути надо указывать относительные, при этом обратите внимание, что параметры у вас никак не используются
+    input_file = open('tournament.txt', 'r', encoding='utf8')
+    output_file = open('tournament_result.txt', 'a', encoding='utf8')
     for line in input_file:
         if '### Tour' in line:
             score = {}
