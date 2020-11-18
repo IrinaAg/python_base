@@ -17,7 +17,6 @@ def treatment(input_file, output_file):
             try:
                 score[name] = get_score(result=res)
                 print(name, res, 'Результат:', get_score(result=res), file=output_file)
-                print(name, res, 'Результат:', get_score_woldwide(result=res), file=output_file)
             except Exception as exc:
                 print(name, res, 'Результат:', exc, file=output_file)
         elif 'winner is .........' in line:
@@ -36,9 +35,9 @@ if __name__ == '__main__':
 
 
 def treatment_woldwide(input_file, output_file):
-    # TODO пути надо указывать относительные, при этом обратите внимание, что параметры у вас никак не используются
-    input_file = open('tournament.txt', 'r', encoding='utf8')
-    output_file = open('tournament_result.txt', 'a', encoding='utf8')
+    # обратите внимание, что параметры у вас никак не используются
+    input_file = open('/Users/agafonova/python_base/lesson_014/tournament.txt', 'r', encoding='utf8')
+    output_file = open('/Users/agafonova/python_base/lesson_014/tournament_result.txt', 'a', encoding='utf8')
     for line in input_file:
         if '### Tour' in line:
             score = {}
@@ -49,7 +48,6 @@ def treatment_woldwide(input_file, output_file):
             res = str(res)
             try:
                 score[name] = get_score_woldwide(result=res)
-                print(name, res, 'Результат:', get_score(result=res), file=output_file)
                 print(name, res, 'Результат:', get_score_woldwide(result=res), file=output_file)
             except Exception as exc:
                 print(name, res, 'Результат:', exc, file=output_file)
