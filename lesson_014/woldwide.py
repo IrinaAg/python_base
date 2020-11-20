@@ -69,17 +69,22 @@ def get_score_woldwide(result):
         print(analized_res, k, v, analized_res[10])
         frames += 1
         check_errors(v)
-        if k >= len(analized_res):  # не могу убрать ошибку когда в конце партии два Х
-            break
+        # if k >= len(analized_res):  # не могу убрать ошибку когда в конце партии два Х
+        #     break
         if 'X' in v:
             if 'X' in analized_res[10]:  # и когда в конце партии один Х, 10 очков прибавляет в третьем фрэйме
                 total += 10  # если переставлять в другое место алгоритма неверно считает другие фрэймы, если в конец
                 print('X8', k, total)  # алгоритма то не считает это условие
-            # TODO т.к. далее вы работаете с фреймами k+1 и k+2 - надо сперва убедиться
-            # TODO что эти фреймы не выходят за рамки
-            # TODO (а они как раз выходят)
-            # TODO в функции add_spare_points я как раз показывал эту проверку
-            # TODO сперва проверяем - есть ли следующий бросок, если да - считаем, если нет - просто идём дальше
+            # т.к. далее вы работаете с фреймами k+1 и k+2 - надо сперва убедиться
+            # что эти фреймы не выходят за рамки
+            # (а они как раз выходят)
+            # в функции add_spare_points я как раз показывал эту проверку
+            # сперва проверяем - есть ли следующий бросок, если да - считаем, если нет - просто идём дальше
+            for _ in range(2): #TODO Все равно не получается уйти от ошибки, если во фрейме есть в конце Х
+                print(_, 'frames1')
+                print(k, len(analized_res))
+                if k >= len(analized_res):
+                    break
             if 'X' in analized_res[k + 1]:
                 if 'X' in analized_res[k + 2]:
                     total += 30
@@ -146,9 +151,12 @@ def get_score_woldwide(result):
     if frames != 10:
         raise Exception('Не правильное количество фреймов!')
     return total
-# TODO но опять же
-# TODO я бы очень советовал не спешить и попробовать разобраться с более функциональным решением
-# TODO если вы готовы потратить на это побольше времени, но не знаете с чего начать - напишите, подумаем вместе
+# но опять же
+# я бы очень советовал не спешить и попробовать разобраться с более функциональным решением
+# если вы готовы потратить на это побольше времени, но не знаете с чего начать - напишите, подумаем вместе
+#TODO Я с этим заданием как будто в яме сижу и не могу понять как выбраться с самого начала было не понятно зачем
+# отдельная функция для ретернов нужна. И столько времени потрачено в пустую и уже нет сил еще копать(
+
 
 
 def woldwide(k, v, analized_res):
@@ -157,6 +165,13 @@ def woldwide(k, v, analized_res):
     # Т.е. например вызов func(result='Х4/34XXXXXXX', frame_number=1) -вернёт-> 10 (4+6)
     # И отдельную функцию можно для одного броска (либо параметром указывать за сколько бросков нужны доп очки
     if 'X' in v:
+        if 'X' in analized_res[10]:
+            return + 10
+        for _ in range(2):
+            print(_, 'frames1')
+            print(k, len(analized_res))
+            if k >= len(analized_res):
+                break
         if 'X' in analized_res[k + 1]:
             if 'X' in analized_res[k + 2]:
                 # print(analized_res[k])
@@ -174,8 +189,6 @@ def woldwide(k, v, analized_res):
                 return + 10 + int(analized_res[k + 1][1])
         elif '-' in analized_res[k + 1][1]:
             return + 10 + int(analized_res[k + 1][0])
-        # elif 'X' in analized_res[10][1]:
-        #     return + 10
         else:
             return + 10 + int(analized_res[k + 1][0]) + int(analized_res[k + 1][1])
     elif '/' in v:
@@ -222,7 +235,7 @@ if __name__ == '__main__':
     #     get_score_woldwide('526-2223434/2/X351/')   #
     #     get_score_woldwide('XXX347/21--------')  # 92
     #     get_score_woldwide('X4/34--------------')#40
-    get_score_woldwide('3532X332/3/62--XX')  # 90
+    get_score_woldwide('3532X332/3/62--XX')  #
     # get_score_woldwide('5-9/--25-------2XX')
 #     get_score_woldwide('--1/--4/--3/--2/XX')
 
