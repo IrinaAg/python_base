@@ -35,7 +35,7 @@ if __name__ == '__main__':
 
 
 def treatment_woldwide(input_file, output_file):
-    # обратите внимание, что параметры у вас никак не используются
+    #обратите внимание, что параметры у вас никак не используются
     input_file = open('/Users/agafonova/python_base/lesson_014/tournament.txt', 'r', encoding='utf8')
     output_file = open('/Users/agafonova/python_base/lesson_014/tournament_result.txt', 'a', encoding='utf8')
     for line in input_file:

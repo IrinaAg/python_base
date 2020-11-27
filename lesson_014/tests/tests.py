@@ -3,6 +3,7 @@
 from unittest import TestCase
 import unittest
 from bowling import check_errors, get_score
+from woldwide import get_score_woldwide
 
 
 class Test(TestCase):
@@ -30,6 +31,14 @@ class Test(TestCase):
     def test_all_strikes(self):
         self.score = get_score(result='XXXXXXXXXX')
         self.assertEqual(200, self.score)
+
+    def test_simple_frame_woldwide(self):
+        self.score = get_score_woldwide(result='526-2223434/2/X351/')
+        self.assertEqual(97, self.score)
+
+    def test_all_strikes_woldwide(self):
+        self.score = get_score_woldwide(result='XXXXXXXXXX')
+        self.assertEqual(270, self.score)
 
 
 if __name__ == '__main__':
