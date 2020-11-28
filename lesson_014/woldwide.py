@@ -197,4 +197,4 @@ if __name__ == '__main__':
     # get_score_woldwide('526-2223434/2/X351/')  # 97
     # get_score_woldwide('3532X332/3/62--XX')  # 102
     # get_score_woldwide('5-9/--25-------2XX') #54
-    get_score_woldwide('--1/--4/--3/--2/XX') #80
+    get_score_woldwide('--1/--4/--3/--2/XX')  # 80

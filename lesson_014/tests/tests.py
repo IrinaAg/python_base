@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from unittest import TestCase
 import unittest
+from unittest import TestCase
+
 from bowling import check_errors, get_score
 from woldwide import get_score_woldwide
 
