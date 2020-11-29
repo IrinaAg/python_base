@@ -47,3 +47,4 @@ def to_command_line():
 
 if __name__ == '__main__':
     to_command_line()
+#зачёт!
