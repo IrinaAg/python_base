@@ -1,5 +1,93 @@
 #!/usr/bin/env python3
+import dispatcher
 
 GROUP_ID = 197472942
 
 TOKEN = ''
+
+INTENTS = [
+    {
+        "name": "Заказ билетов",
+        "tokens": ("/ticket"),
+        "scenario": "booking tickets",
+        "answer": None
+    },
+    {
+        "name": "Справка как работает бот",
+        "tokens": ("/help"),
+        "scenario": None,
+        "answer": "Для начала работы бота введите /ticket"
+    }
+]
+
+SCENARIOS = {
+    "booking tickets": {
+        "first_step": "step1",
+        "steps": {
+            "step1": {
+                "text": "Введите город отправления",
+                "failure_text": "Есть рейсы из города: Москва, Санкт-Петербург, Казань. Попробуйте еще раз",
+                "handler": "handler_city_dep",
+                "next_step": "step2"
+            },
+            "step2": {
+                "text": "Введите город назначения",
+                "failure_text": "Есть рейсы в города: Москва, Санкт-Петербург, Казань. Попробуйте еще раз",
+                "handler": "handler_city_arr",
+                "next_step": "step3"
+            },
+            "step3": {
+                "text": "Введите дату вылета в формате ДД-ММ-ГГГГ",
+                "failure_text": "Пожалуйста, еще раз введите дату вылета в формате ДД-ММ-ГГГГ",
+                "handler": "handler_date",
+                "next_step": "step4"
+            },
+            "step4": {
+                "text": "Пожалуйста, выберите и введите номер нужного рейса: "
+                        "рейс №1 из {city_dep} в {city_arr} дата:"
+                        "рейс №2 из {city_dep} в {city_arr} дата:"
+                        "рейс №3 из {city_dep} в {city_arr} дата:"
+                        "рейс №4 из {city_dep} в {city_arr} дата:"
+                        "рейс №5 из {city_dep} в {city_arr} дата:",#TODO не могу понять как передать сюда дату рейса из
+                                                                    #TODO функции диспетчера, то что написано в общем
+                                                                    #TODO чате не понятно
+                "failure_text": "",
+                "handler": "handler_flight",
+                "next_step": "step5"
+            },
+            "step5": {
+                "text": "Пожалуйста, уточните количество мест",
+                "failure_text": "",#проверка
+                "handler": "handler_number",
+                "next_step": "step6"
+            },
+            "step6": {
+                "text": "Пожалуйста, напишите комментарий",
+                "failure_text": "",#проверка
+                "handler": "handler_",
+                "next_step": "step7"
+            },
+            "step7": {
+                "text": "Пожалуйста, уточните правильно ли введены данные рейса",
+                "failure_text": "",#проверка
+                "handler": "handler_",
+                "next_step": "step8"
+            },
+            "step8": {
+                "text": "Пожалуйста, напишите ваш номер телефона",
+                "failure_text": "Пожалуйста, еще раз введит номер телефона",
+                "handler": "handler_phone_number",
+                "next_step": "step9"
+            },
+            "step9": {
+                "text": "С вами свяжутся по указанному {phone_number} телефону",
+                "failure_text": None,
+                "handler": None,
+                "next_step": None
+            }
+        }
+    }
+}
+
+
+DEFAULT_ANSWER = {'Для поиска и заказа билета введите /ticket'}
