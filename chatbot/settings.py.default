@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import dispatcher
 
 GROUP_ID = 197472942
 
@@ -43,16 +42,14 @@ SCENARIOS = {
                 "next_step": "step4"
             },
             "step4": {
-                "text": "Пожалуйста, выберите и введите номер нужного рейса: "
-                        "рейс №1 из {city_dep} в {city_arr} дата:"
-                        "рейс №2 из {city_dep} в {city_arr} дата:"
-                        "рейс №3 из {city_dep} в {city_arr} дата:"
-                        "рейс №4 из {city_dep} в {city_arr} дата:"
-                        "рейс №5 из {city_dep} в {city_arr} дата:",#TODO не могу понять как передать сюда дату рейса из
-                                                                    #TODO функции диспетчера, то что написано в общем
-                                                                    #TODO чате не понятно
-                "failure_text": "",
-                "handler": "handler_flight",
+                "text": "Пожалуйста, выберите и введите номер нужного рейса: \n{рейсы}",
+                        # "рейс №1 из {city_dep} в {city_arr} дата:"
+                        # "рейс №2 из {city_dep} в {city_arr} дата:"
+                        # "рейс №3 из {city_dep} в {city_arr} дата:"
+                        # "рейс №4 из {city_dep} в {city_arr} дата:"
+                        # "рейс №5 из {city_dep} в {city_arr} дата: ",
+                "failure_text": " ",
+                "handler": "dispatcher",
                 "next_step": "step5"
             },
             "step5": {

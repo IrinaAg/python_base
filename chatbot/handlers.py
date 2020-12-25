@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+import datetime
+import pandas as pd
 import re
 
 
@@ -32,6 +34,31 @@ def handler_date(text, context):
         return True
     else:
         return False
+
+
+def dispatcher(start='12/24/2020'):#city_dep, city_arr #datetime.datetime.today()
+    month = pd.date_range(start=start,periods=5, freq='7D')
+    for day_spb in month:
+        dict = {'Москва': {
+                'Санкт-Петербург': [day_spb]}}
+        list_of_dates = []
+        list_of_dates.append(dict['Москва']['Санкт-Петербург'][0])
+        context = ('рейс Москва - Санкт-Петербург:', list_of_dates[0])
+        # print('рейс Москва - Санкт-Петербург:', list_of_dates[0])
+        # context = f'рейс Москва - Санкт-Петербург: {list_of_dates[0]}'
+        # print(context)
+        city = ['Москва', 'Санкт-Петербург']
+        multiline_string = '''Рейс {0} в {1} дата рейса:'''.format(*city)
+        print(multiline_string)#TODO как добавить многострочную строку в словарь не знаю
+        print(dict['Москва']['Санкт-Петербург'][0])
+    week = pd.date_range(start='12/26/2020',periods=5, freq='W')
+    for day_kzn in week:
+        dict1 = {'Москва': {
+                'Казань': [day_kzn]}}
+        print(dict1['Москва']['Казань'][0])
+
+
+dispatcher()
 
 
 def handler_flight(text, context):
